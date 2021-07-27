@@ -1,0 +1,42 @@
+Error in tempdisagg::td(w ~ d, method = "fast", conversion = "mean") : 
+  right hand side contains NAs
+  
+########################
+
+> proc_index(keywords, "AT", "economic_sentiment")
+.latest_google_date: 2099-01-01
+previous_google_date: 1900-01-01
+Downloading keyword: wirtschaftskrise
+Downloading hourly data
+Downloading data for now 7-d
+Downloading daily data
+Downloading data for 2021-04-08 2021-07-07
+Downloading data for 2021-04-09 2021-07-07
+Downloading weekly data
+Downloading data for 2020-07-07 2021-07-07
+Downloading data for 2020-07-14 2021-07-07
+Downloading monthly data
+Downloading data for 2006-01-01 2021-07-07
+Downloading data for 2006-02-01 2021-07-07
+combining frequencies of keyword: wirtschaftskrise
+extend daily data by hourly data for the missing recent days
+align daily data to weekly
+Error in tempdisagg::td(w ~ d, method = "fast", conversion = "mean") : 
+  right hand side contains NAs
+  
+#####################################
+
+> proc_keyword_init("wirtschaftskrise", "AT")
+Downloading keyword: wirtschaftskrise
+Downloading daily data
+Downloading data for 2006-01-01 2006-07-01
+Downloading data for 2006-01-01 2006-07-01
+no results for some ids: wirtschaftskrise
+Downloading data for 2006-01-16 2006-07-16
+Downloading data for 2006-01-16 2006-07-16
+no results for some ids: wirtschaftskrise
+Downloading data for 2006-01-31 2006-07-31
+Downloading data for 2006-01-31 2006-07-31
+no results for some ids: wirtschaftskrise
+Downloading data for 2006-02-15 2006-08-15
+Downloading data for 2006-02-15 2006-08-15
