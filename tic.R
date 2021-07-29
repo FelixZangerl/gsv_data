@@ -8,5 +8,5 @@ get_stage("deploy") %>%
   add_step(step_install_cran("tibble")) %>%
   add_code_step(library(prophet)) %>%
   add_code_step(withr::with_package("trendecon", proc_trendecon_at())) %>%
-  add_code_step(withr::with_package("trendecon", proc_index(c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann"), geo, "clothing"))) %>%
+  add_code_step(withr::with_package("trendecon", proc_index(c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann"), "AT", "clothing"))) %>%
   add_step(step_do_push_deploy())
