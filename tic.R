@@ -9,4 +9,7 @@ get_stage("deploy") %>%
   add_code_step(library(prophet)) %>%
   add_code_step(withr::with_package("trendecon", proc_trendecon_at())) %>%
   add_code_step(withr::with_package("trendecon", proc_index(c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann"), "AT", "clothing"))) %>%
+  add_code_step(geo <- "AT") %>%
+  add_code_step(food_delivery <- c("take away", "takeaway", "pizza bestellen")) %>%
+  add_code_step(withr::with_package("trendecon"), proc_index(food_delivery, geo, "food_delivery")) %>%
   add_step(step_do_push_deploy())
