@@ -8,10 +8,10 @@ keywords <- c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz")
 #keywords <- "wirtschaftskrise"
 #keywords <- c("arbeitslos","insolvenz")
 
-#proc_keyword_init(keywords[1], geo)
-#proc_keyword_init(keywords[2], geo)
-#proc_keyword_init(keywords[3], geo)
-#proc_keyword_init(keywords[4], geo)
+proc_keyword_init(keywords[1], geo)
+proc_keyword_init(keywords[2], geo)
+proc_keyword_init(keywords[3], geo)
+proc_keyword_init(keywords[4], geo)
 
 proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"), 
            geo, "economic_sentiment")
@@ -110,3 +110,13 @@ proc_index(luxury, geo, "luxury")
 #ts_plot(x)
 #
 #ts_plot(economic_sentiment_sa)
+
+krise2 <- c("Krise", "Abschwung", "arbeitslos", "Rezession")
+
+proc_keyword_init(krise2[1], geo)
+proc_keyword_init(krise2[2], geo)
+proc_keyword_init(krise2[3], geo)
+proc_keyword_init(krise2[4], geo)
+
+proc_index(krise2, geo, "krise2")
+
