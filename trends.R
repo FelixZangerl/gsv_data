@@ -113,10 +113,10 @@ proc_index(luxury, geo, "luxury")
 
 krise2 <- c("Krise", "Abschwung", "arbeitslos", "Rezession")
 
-#proc_keyword_init(krise2[1], geo)
-#proc_keyword_init(krise2[2], geo)
-#proc_keyword_init(krise2[3], geo)
-#proc_keyword_init(krise2[4], geo)
+proc_keyword_init(krise2[1], geo)
+proc_keyword_init(krise2[2], geo)
+proc_keyword_init(krise2[3], geo)
+proc_keyword_init(krise2[4], geo)
 
 proc_index(krise2, geo, "krise2")
 
