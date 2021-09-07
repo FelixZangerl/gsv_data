@@ -28,4 +28,4 @@ get_stage("deploy") %>%
 #  add_code_step(withr::with_package("trendecon", proc_index(mobility, geo, "mobility"))) %>%
 #  add_code_step(luxury <- c("juwelier","swarovski","uhr","uhren","christ","feichtinger")) %>%
 #  add_code_step(withr::with_package("trendecon", proc_index(luxury, geo, "luxury"))) %>%
-#  add_step(step_do_push_deploy())
+  add_step(step_do_push_deploy())
