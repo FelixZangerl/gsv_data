@@ -1,0 +1,40 @@
+STATcube
+
+"Main aggregates of National Accounts, ESA 2010, final consumption expenditure of households (Q)"
+"time series and Hauptaggregate der VGR by current prices in million EUR"
+"Counting: current prices in million EUR"
+
+"time series","Hauptaggregate der VGR","Values","Number","Annotations",
+"2019","Food","current prices in million EUR",17809.5,
+"1999","Food","current prices in million EUR",10243.9,
+"2000","Food","current prices in million EUR",10586.8,
+"2001","Food","current prices in million EUR",11040.4,
+"2002","Food","current prices in million EUR",11278.2,
+"2003","Food","current prices in million EUR",11436.3,
+"2004","Food","current prices in million EUR",11906.9,
+"2005","Food","current prices in million EUR",12248.1,
+"2006","Food","current prices in million EUR",12515.7,
+"2007","Food","current prices in million EUR",13020.0,
+"2008","Food","current prices in million EUR",13624.2,
+"2009","Food","current prices in million EUR",13694.3,
+"2010","Food","current prices in million EUR",13803.3,
+"2011","Food","current prices in million EUR",14332.0,
+"2012","Food","current prices in million EUR",14918.1,
+"2013","Food","current prices in million EUR",15538.6,
+"2014","Food","current prices in million EUR",15806.9,
+"2015","Food","current prices in million EUR",16141.9,
+"2016","Food","current prices in million EUR",16370.0,
+"2017","Food","current prices in million EUR",16829.2,
+"2018","Food","current prices in million EUR",17298.5,
+"1995","Food","current prices in million EUR",9841.9,
+"1996","Food","current prices in million EUR",10035.9,
+"1997","Food","current prices in million EUR",10189.0,
+"1998","Food","current prices in million EUR",10289.4,
+
+
+Symbol,Description
+"Q","STATcube – Statistical Database of STATISTICS AUSTRIA"
+"Main aggregates of National Accounts, ESA 2010, final consumption expenditure of households",".) Legal foundations Regulation (EU) Nr. 549/2013 of the European Parliament and of the council of 21 May, 2013 on the European System of national and regional accounts in the European Union (ESA 2010) .) Chained volume indices are drived from estimates at previous years' prices, reference year is 2015. Data are as of September 2020 .) Documentation Directorate Macro-economic Statistics - National Accounts Gerhard Hengst-Denner, Tel. +43 (1) 71128-7150 gerhard.hengst-denner@statistik.gv.at Reich Thomas, Tel. +43 (1) 71128-8148 thomas.reich@statistik.gv.at"
+
+
+(c) Copyright Statistics Austria
