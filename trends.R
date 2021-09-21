@@ -13,10 +13,17 @@ keywords <- c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz")
 #proc_keyword_init(keywords[3], geo)
 #proc_keyword_init(keywords[4], geo)
 
+#proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"), 
+#           geo, "economic_sentiment")
+
 proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"), 
-           geo, "economic_sentiment")
+           geo, "trendecon")
 
 proc_trendecon_at()
+
+proc_trendecon_de()
+
+proc_trendecon_ch()
 
 #### CLOTHING #####
 clothing <- c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann")
