@@ -21,9 +21,8 @@ proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"),
 
 proc_trendecon_at()
 
-proc_trendecon_de()
-
-proc_trendecon_ch()
+#proc_trendecon_de()
+#proc_trendecon_ch()
 
 #### CLOTHING #####
 clothing <- c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann")
