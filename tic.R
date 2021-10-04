@@ -9,8 +9,8 @@ get_stage("deploy") %>%
   add_step(step_install_cran("httr")) %>%
   add_code_step(withr::with_package("httr", set_config(config(http_version = 0)))) %>%
   add_code_step(library(prophet)) %>%
-  add_code_step(source("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/trends.R")) %>%
-#  add_code_step(withr::with_package("trendecon", proc_trendecon_at())) %>%
+#  add_code_step(source("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/trends.R")) %>%
+  add_code_step(withr::with_package("trendecon", proc_trendecon_at())) %>%
 #  add_code_step(geo <- "AT") %>%
 #  add_code_step(withr::with_package("trendecon", proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"), geo, "economic_sentiment"))) %>%
 #  add_code_step(withr::with_package("trendecon", proc_index(c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann"), geo, "clothing"))) %>%
