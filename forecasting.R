@@ -1,3 +1,4 @@
+rm(list=ls())
 library(dygraphs)
 library(readr)
 library(tsbox)
@@ -8,12 +9,13 @@ library(ggplot2)
 library(GGally)
 library(fpp) 
 library(fpp2)
+library(prophet)
 
 ### MAIN INDICATOR ####
 pes <- read_csv("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/at/economic_sentiment_sa.csv") %>%
-  select(time,value) %>%
-  mutate(value = -value) %>%
-  ts_ts()
+#  select(time,value) %>%
+  mutate(value = -value) #%>%
+  #ts_ts()
 
 ### MAIN INDICATOR COMPONENTS ####
 
@@ -29,6 +31,28 @@ Insolvenz_m <- read_csv("./raw/at/Insolvenz_m.csv") %>% select(time,value) %>% t
 gdp_m <- read_csv("./real_data/gdp_aut_m.csv") %>% rename(time = DATE, gdp_m = AUTLORSGPNOSTSAM) %>%
   filter(time > "2006-12-31") %>% #%>% mutate(gdp_m = gdp_m / 100) 
   ts_xts()
+
+
+### FORECAST ####
+m <- pes %>% rename(ds = time, y = value)
+max <- max(m$ds)
+
+m <- prophet(m, growth = "linear",
+             daily.seasonality = FALSE,
+             yearly.seasonality = FALSE,
+             weekly.seasonality = FALSE)
+
+future <- make_future_dataframe(m, periods = 365)
+tail(future)
+
+forecast <- predict(m, future)
+tail(forecast[c('ds', 'yhat', 'yhat_lower', 'yhat_upper')])
+
+plot(m, forecast) 
+#add_changepoints_to_plot(m)
+abline(h = max)
+
+prophet_plot_components(m, forecast)
 
 ### COMPOSITE ####
 composite_m <- cbind(Wirtschaftskrise_m, Kurzarbeit_m, Insolvenz_m, arbeitslos_m, gdp_m)
