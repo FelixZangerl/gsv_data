@@ -83,8 +83,8 @@ p <- ts(c(p1,p2),
         frequency = frequency(p1))
 
 pdat <- data.frame(Y = as.numeric(p), date = time(p))
-pdat$x <- (pdat$Y - lag(pdat$Y,12)) / lag(pdat$Y,12) * 100 # inflation zum vorjahresmonat 
-#pdat$x <- (pdat$Y - lag(pdat$Y)) / lag(pdat$Y) *100
+#pdat$x <- (pdat$Y - lag(pdat$Y,12)) / lag(pdat$Y,12) * 100 # inflation zum vorjahresmonat 
+pdat$x <- (pdat$Y - lag(pdat$Y)) / lag(pdat$Y) *100
 pdat <- pdat[!is.na(pdat$x),] # remove NAs
 
 p <- ts(pdat$x, start = c(2007,1), end = c(2021,8), frequency = 12)

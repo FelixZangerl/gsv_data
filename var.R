@@ -116,7 +116,7 @@ rm(var.AIC, var.SC, var.AIC.c, var.SC.c, AIC.woc, AIC.wc, SC.woc, SC.wc)
 #VARselect(uschange[,1:2], lag.max=8,
 #          type="const")[["selection"]]
 
-VARselect(pesdat, lag.max=8,
+VARselect(pesdat, lag.max=3*12,
           type="const")[["selection"]]
 
 #crisis <- NULL
@@ -136,16 +136,20 @@ serial.test(var4, lags.pt=10, type="PT.asymptotic")
 var5 <- vars::VAR(pesdat, p=5, type="const", exogen = crisis)
 serial.test(var5, lags.pt=10, type="PT.asymptotic")
 
-var6d <- VAR(pesdat, p=6, type="const", exogen = crisis)
-serial.test(var6d, lags.pt=10, type="PT.asymptotic") # no serial correlation
+var6d <- VAR(pesdat, p=18, type="const", exogen = crisis)
+serial.test(var6d, lags.pt=30, type="PT.asymptotic") # no serial correlation
 
-var6 <- VAR(pesdat, p=6, type="const")
-serial.test(var6, lags.pt=10, type="PT.asymptotic") # no serial correlation
+lag <- 12
+
+var6 <- VAR(pesdat, p=lag, type="const")
+serial.test(var6, lags.pt=lag*2, type="PT.asymptotic") # no serial correlation
+
 
 var6cc <- VAR(ccdat, p=6, type="const")
 serial.test(var6cc, lags.pt = 10, type="PT.asymptotic")
 
 rm(var1, var2, var3, var4, var5)
+
 
 #### MODEL TABLE ####
 
@@ -163,8 +167,6 @@ stargazer(var6$varresult, type = "text", header = F, title = "VAR(6)",
 
 #### MODEL DIAGNOSTICS ####
 
-serial.test(var6, lags.pt = 10, type="PT.asymptotic")
-
 normtest <- normality.test(var6)
 print(normtest)
 plot(normtest)
@@ -175,8 +177,68 @@ print(arch)
 stability <- stability(var6, type = "OLS-CUSUM")
 plot(stability)
 
-ctest <- ca.jo(pesdat, type = "eigen", ecdet = "const", K = 6)
-summary(ctest)
+ctest_e <- ca.jo(pesdat, type = "eigen", ecdet = "const", K = 15)
+summary(ctest_e)
+
+ctest_t <- ca.jo(pesdat, type = "trace", ecdet = "const", K = 15)
+summary(ctest_t)
+
+### VECM #####
+library(tsDyn)
+
+vecm16 <- VECM(pesdat,  lag = lag, r = 2, estim = "2SOLS")
+summary(vecm16)
+
+vecm16var <- vec2var(ctest_t, r=2)
+serial.test(vecm16var, lags.pt = lag*2)
+
+arch1 <- arch.test(vecm16var, lags.multi = lag, multivariate.only = T)
+print(arch1)
+
+norm1 <- normality.test(vecm16var)
+print(norm1)
+
+#### FORECAST ####
+
+forecast <- predict(vecm16var, n.ahead = 3)
+forecast::autoplot(forecast)
+
+roll <- 20
+
+predict_roll <- predict_rolling(vecm16, n.ahead = 6, nroll=roll)
+forecast_roll <- accuracy_stat(predict_roll)
+
+forecast_roll
+
+plot(window(pesdat[,"pes"]))
+preds_roll_ts <- ts(predict_roll$pred, start=time(pesdat)[nrow(pesdat)-roll], freq=12)
+lines(preds_roll_ts[,"pes"], col=2, lty=2)
+legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
+title("Comparison of true and rolling 1-ahead forecasts\n")
+
+plot(window(pesdat[,"Dune"]))
+preds_roll_ts <- ts(predict_roll$pred, start=time(pesdat)[nrow(pesdat)-roll], freq=12)
+lines(preds_roll_ts[,"Dune"], col=2, lty=2)
+legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
+title("Comparison of true and rolling 1-ahead forecasts\n")
+
+plot(window(pesdat[,"cpi"]))
+preds_roll_ts <- ts(predict_roll$pred, start=time(pesdat)[nrow(pesdat)-roll], freq=12)
+lines(preds_roll_ts[,"cpi"], col=2, lty=2)
+legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
+title("Comparison of true and rolling 1-ahead forecasts\n")
+
+
+data(barry)
+## model estimated on full sample:
+mod_vec <- VECM(barry, lag=2)
+## generate 10 1-step-ahead forecasts:
+preds_roll <- predict_rolling(mod_vec, nroll=10)## plot the results:
+plot(window(barry[,"dolcan"],start=1998), type="l", ylab="barry: dolcan")
+preds_roll_ts <- ts(preds_roll$pred, start=time(barry)[nrow(barry)-10], freq=12)
+lines(preds_roll_ts[,"dolcan"], col=2, lty=2)
+legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
+title("Comparison of true and rolling 1-ahead forecasts\n")
 
 #### GRANGER CAUSALITY ####
 
@@ -207,13 +269,15 @@ plot(fevd)
 
 #### IN SAMPLE #### horizon = 3
 # https://stackoverflow.com/questions/18244506/measuring-var-accuracy-using-accuracy-from-forecast Rob Hyndman
-lags <- 6
-horizon <- 1
-trainingdata <- window(ccdat, end=c(2021,6))
-testdata <- window(ccdat, start=c(2021,7))
-trainingdata <- window(pesdat, end=c(2020,2))
-testdata <- window(pesdat, start=c(2020,3), end=c(2020,3))
+lags <- 16
+horizon <- 3
+#trainingdata <- window(ccdat, end=c(2021,6))
+#testdata <- window(ccdat, start=c(2021,7))
+trainingdata <- window(pesdat, end=c(2021,4))
+testdata <- window(pesdat, start=c(2021,5), end=c(2021,7))
 v <- VAR(trainingdata, type="const", p=lags)
+#v <- vecm16var
+#v <- vecm16
 p <- predict(v, n.ahead=horizon)
 res <- residuals(v)
 fits <- fitted(v)
@@ -227,7 +291,7 @@ for(i in 1:3)
   acc_cpi <- accuracy(fc,testdata[,3])
 }
 library(ggfortify)
-predplot <- forecast::autoplot(stats::predict(v, n.ahead=3)) #forecast::autoplot
+predplot <- forecast::autoplot(stats::predict(v, n.ahead=horizon)) #forecast::autoplot
 
 plotly::ggplotly(predplot)
 
@@ -275,9 +339,8 @@ fanchart(pred_os)
 forecast::autoplot(pred_os)
 
 plot(pesdat)
-dygraph(pred)
+#dygraph(pred)
 
-save(pesdat, ccdat, p, v, pred_os, var6, acc_pes, acc_Dune, acc_cpi, file="../gsv_data/r_data/var.RData")
+save(pesdat, ccdat, p, v, pred_os, var6, vecm16var, forecast_roll, acc_pes, acc_Dune, acc_cpi, file="../gsv_data/r_data/var.RData")
 
 load("./r_data/var.RData")
-``
