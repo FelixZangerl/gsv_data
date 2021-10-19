@@ -19,7 +19,7 @@ pes <- pes_d %>%
 ### MAIN INDICATOR components - monthly
 Wirtschaftskrise_d <- read_csv(paste0("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/",geo,"/Wirtschaftskrise_sa.csv")) %>%
   filter(id == "seas_adj") %>%
-  select(time,value) %>%
+  dplyr::select(time,value) %>%
   ts_xts() 
 
 Wirtschaftskrise <- Wirtschaftskrise_d %>%
@@ -27,7 +27,7 @@ Wirtschaftskrise <- Wirtschaftskrise_d %>%
 
 Kurzarbeit_d <- read_csv(paste0("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/",geo,"/Kurzarbeit_sa.csv")) %>%
   filter(id == "seas_adj") %>%
-  select(time,value) %>%
+  dplyr::select(time,value) %>%
   mutate(value = -value) %>%
   ts_xts()
 
@@ -36,7 +36,7 @@ Kurzarbeit <- Kurzarbeit_d %>%
 
 Insolvenz_d <- read_csv(paste0("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/",geo,"/Insolvenz_sa.csv")) %>%
   filter(id == "seas_adj") %>%
-  select(time,value) %>%
+  dplyr::select(time,value) %>%
   mutate(value = -value) %>%
   ts_xts()
 
@@ -45,7 +45,7 @@ Insolvenz <- Insolvenz_d %>%
 
 arbeitslos_d <- read_csv(paste0("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/",geo,"/arbeitslos_sa.csv")) %>%
   filter(id == "seas_adj") %>%
-  select(time,value) %>%
+  dplyr::select(time,value) %>%
   mutate(value = -value) %>%
   ts_xts()
 

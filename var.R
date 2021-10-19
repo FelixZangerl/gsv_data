@@ -13,7 +13,6 @@ load(file="./r_data/data.RData")
 # une is in levels
 # p is in changes (month on month)
 
-#
 begin <- as.Date("2007-01-01")
 
 #### create dummies
@@ -59,9 +58,9 @@ crisis <- window(crisis, start=start, end=end) %>% ts_ts()
 
 composite_m <- cbind(pes, cc, une, cpi)
 
-#composite_m %>%
-#  as.data.frame() %>%
-#  GGally::ggpairs() #var_pairs.png
+composite_m %>%
+  as.data.frame() %>%
+  GGally::ggpairs() #var_pairs.png
 
 pesdat <- cbind(pes, Dune, cpi)
 #pesdat <- window(pesdat, start=as.Date("2007-01-01",origin = "1970-01-01")) ## TODO: include 2016-12
@@ -116,7 +115,7 @@ rm(var.AIC, var.SC, var.AIC.c, var.SC.c, AIC.woc, AIC.wc, SC.woc, SC.wc)
 #VARselect(uschange[,1:2], lag.max=8,
 #          type="const")[["selection"]]
 
-VARselect(pesdat, lag.max=3*12,
+VARselect(pesdat, lag.max=2*12,
           type="const")[["selection"]]
 
 #crisis <- NULL
@@ -186,7 +185,7 @@ summary(ctest_t)
 ### VECM #####
 library(tsDyn)
 
-vecm16 <- VECM(pesdat,  lag = lag, r = 2, estim = "2SOLS")
+vecm16 <- VECM(pesdat,  lag = lag, r = 2)
 summary(vecm16)
 
 vecm16var <- vec2var(ctest_t, r=2)
@@ -199,13 +198,13 @@ norm1 <- normality.test(vecm16var)
 print(norm1)
 
 #### FORECAST ####
-
+library(ggfortify)
 forecast <- predict(vecm16var, n.ahead = 3)
 forecast::autoplot(forecast)
 
-roll <- 20
+roll <- 3
 
-predict_roll <- predict_rolling(vecm16, n.ahead = 6, nroll=roll)
+predict_roll <- predict_rolling(vecm16, n.ahead = 3, nroll=roll)
 forecast_roll <- accuracy_stat(predict_roll)
 
 forecast_roll
@@ -225,18 +224,6 @@ title("Comparison of true and rolling 1-ahead forecasts\n")
 plot(window(pesdat[,"cpi"]))
 preds_roll_ts <- ts(predict_roll$pred, start=time(pesdat)[nrow(pesdat)-roll], freq=12)
 lines(preds_roll_ts[,"cpi"], col=2, lty=2)
-legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
-title("Comparison of true and rolling 1-ahead forecasts\n")
-
-
-data(barry)
-## model estimated on full sample:
-mod_vec <- VECM(barry, lag=2)
-## generate 10 1-step-ahead forecasts:
-preds_roll <- predict_rolling(mod_vec, nroll=10)## plot the results:
-plot(window(barry[,"dolcan"],start=1998), type="l", ylab="barry: dolcan")
-preds_roll_ts <- ts(preds_roll$pred, start=time(barry)[nrow(barry)-10], freq=12)
-lines(preds_roll_ts[,"dolcan"], col=2, lty=2)
 legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
 title("Comparison of true and rolling 1-ahead forecasts\n")
 
@@ -264,6 +251,27 @@ plot(cpi_irf)
 
 fevd <- fevd(var6, n.ahead = 12)
 plot(fevd)
+
+
+### BENCHMARK ####
+
+#### GARCH ####
+
+library(rugarch)
+library(rmgarch)
+library(quantmod)
+
+#### ARIMA ####
+
+fit <- auto.arima(pesdat[,"pes"])
+plot(forecast(fit,h=3))
+accuracy(fit)
+
+pes2 <- window(pesdat[,"pes"], end=c(2021,4))
+pesar2 <- auto.arima(pes2)
+pesfit2 <- forecast(pesar2, h=3)
+pes3 <- window(pesdat[,"pes"], start=c(2021,5))
+accuracy(pesfit2, pes3)
 
 ### FORECAST ####
 
@@ -341,6 +349,6 @@ forecast::autoplot(pred_os)
 plot(pesdat)
 #dygraph(pred)
 
-save(pesdat, ccdat, p, v, pred_os, var6, vecm16var, forecast_roll, acc_pes, acc_Dune, acc_cpi, file="../gsv_data/r_data/var.RData")
+save(pesdat, ccdat, p, v, pred_os, var6, vecm16var, vecm16, forecast_roll, acc_pes, acc_Dune, acc_cpi, file="../gsv_data/r_data/var.RData")
 
 load("./r_data/var.RData")
