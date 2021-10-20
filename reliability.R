@@ -47,9 +47,5 @@ ts_dygraphs(ts_c(
 #  dyRangeSelector(dateWindow = c("2020-01-01", Sys.Date()))%>%
   dyOptions(useDataTimezone = TRUE)
 
-ggplot(pes, aes(x=time(pes)))+
-  geom_line(aes(y=pes))+
-  geom_line(aes(y=cc))+
-  geom_line(aes(y=gdp))
 
 save(cc, gdp, pes, file = "../gsv_data/r_data/reliability.RData")

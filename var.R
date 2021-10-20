@@ -46,6 +46,7 @@ Dune <- diff(une) %>% ts_ts() # une not stationary
 Dune <- window(Dune, start=c(2007,1))
 Dpes <- diff(pes) # pes stationary
 Dcpi <- diff(p) # cpi stationary
+Dint <- diff(int)
 
 int <- window(int, start=start, end=end) %>% ts_ts()
 cc <- window(cc, start=start, end=end) %>% ts_ts()
@@ -63,6 +64,7 @@ composite_m %>%
   GGally::ggpairs() #var_pairs.png
 
 pesdat <- cbind(pes, Dune, cpi)
+#pesdat <- cbind(pes, cpi, Dint)
 #pesdat <- window(pesdat, start=as.Date("2007-01-01",origin = "1970-01-01")) ## TODO: include 2016-12
 pesdat <- window(pesdat, start=c(2007,1))
 #pesdat <- window(pesdat, end=as.Date("2019-01-12"))
@@ -227,128 +229,51 @@ lines(preds_roll_ts[,"cpi"], col=2, lty=2)
 legend("bottomright", lty=c(1,2), col=1:2, leg=c("True", "Fitted"))
 title("Comparison of true and rolling 1-ahead forecasts\n")
 
-#### GRANGER CAUSALITY ####
+##### BENCHMARK ####
 
-pes_granger <- causality(var6, cause = "pes")
-pes_granger
+###### CC ########
 
-Dune_granger <- causality(var6, cause= "Dune")
-Dune_granger
+vecm16cc <- tsDyn::VECM(ccdat,  lag = lag, r = 2)
+ctest_t_cc <- ca.jo(ccdat, type = "trace", ecdet = "const", K = 15)
+vecm16var_cc <- vec2var(ctest_t, r=2)
+predict_roll_cc <- predict_rolling(vecm16cc, n.ahead = 6, nroll=roll)
+forecast_roll_cc <- accuracy_stat(predict_roll_cc)
 
-cpi_granger <- causality(var6, cause = "cpi")
-cpi_granger
+###### CRISIS ########
 
-#### IRF #####
+pesdat_cov <- window(pesdat, end = c(2020,3))
+vecm16cov <- tsDyn::VECM(pesdat_cov,  lag = lag, r = 2)
+ctest_t_cov <- ca.jo(pesdat_cov, type = "trace", ecdet = "const", K = 15)
+vecm16var_cov <- vec2var(ctest_t, r=2)
+predict_roll_cov <- predict_rolling(vecm16cov, n.ahead = 6, nroll=roll)
+forecast_roll_cov <- accuracy_stat(predict_roll_cov)
 
-pes_irf <- irf(var6, impulse = "pes", response = "pes", n.ahead = 6)
-plot(pes_irf)
+###### ACCS FIGURE AND TABLE ##########
 
-une_irf <- irf(var6, impulse = "pes", response = "Dune", n.ahead = 6)
-plot(une_irf)
+forecast_roll$model <- "PES"
+forecast_roll_cc$model <- "CC"
+forecast_roll_cov$model <- "Crisis"
 
-cpi_irf <- irf(var6, impulse = "pes", response = "cpi", n.ahead = 6)
-plot(cpi_irf)
+forecast_roll_cc$var[forecast_roll_cc$var=="cc"] <- "pes"
 
-fevd <- fevd(var6, n.ahead = 12)
-plot(fevd)
+accs <- rbind(forecast_roll, forecast_roll_cc, forecast_roll_cov)
 
-
-### BENCHMARK ####
-
-#### GARCH ####
-
-library(rugarch)
-library(rmgarch)
-library(quantmod)
-
-#### ARIMA ####
-
-fit <- auto.arima(pesdat[,"pes"])
-plot(forecast(fit,h=3))
-accuracy(fit)
-
-pes2 <- window(pesdat[,"pes"], end=c(2021,4))
-pesar2 <- auto.arima(pes2)
-pesfit2 <- forecast(pesar2, h=3)
-pes3 <- window(pesdat[,"pes"], start=c(2021,5))
-accuracy(pesfit2, pes3)
-
-### FORECAST ####
-
-#### IN SAMPLE #### horizon = 3
-# https://stackoverflow.com/questions/18244506/measuring-var-accuracy-using-accuracy-from-forecast Rob Hyndman
-lags <- 16
-horizon <- 3
-#trainingdata <- window(ccdat, end=c(2021,6))
-#testdata <- window(ccdat, start=c(2021,7))
-trainingdata <- window(pesdat, end=c(2021,4))
-testdata <- window(pesdat, start=c(2021,5), end=c(2021,7))
-v <- VAR(trainingdata, type="const", p=lags)
-#v <- vecm16var
-#v <- vecm16
-p <- predict(v, n.ahead=horizon)
-res <- residuals(v)
-fits <- fitted(v)
-
-for(i in 1:3)
-{
-  fc <- structure(list(mean=p$fcst[[i]][,"fcst"], x=trainingdata[,i],
-                       fitted=c(rep(NA,lags),fits[,i])),class="forecast")
-  acc_pes <- accuracy(fc,testdata[,1])
-  acc_Dune <- accuracy(fc,testdata[,2])
-  acc_cpi <- accuracy(fc,testdata[,3])
-}
-library(ggfortify)
-predplot <- forecast::autoplot(stats::predict(v, n.ahead=horizon)) #forecast::autoplot
-
-plotly::ggplotly(predplot)
-
-autoplot(pesdat) +
-  autolayer(predict(v, n.ahead=3))
-
-reltable_pes <- data.frame(horizon = as.factor(c(1,1,1,3,3,3,6,6,6)), 
-                       model = c("pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis"), 
-                       rmse = c(0.3962482,0.08773341,6.8372466,0.3595160,0.1585272,4.3886801,0.5579713,0.8850608,3.1768921))
-
-reltable_Dune <- data.frame(horizon = as.factor(c(1,1,1,3,3,3,6,6,6)), 
-                           model = c("pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis"), 
-                           rmse = c(0.5639840,0.7383306,0.3647817,0.9507732,0.9285637,0.8163448,1.0177657,0.9945709,1.0345714))
-
-reltable_cpi <- data.frame(horizon = as.factor(c(1,1,1,3,3,3,6,6,6)), 
-                           model = c("pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis"), 
-                           rmse = c(0.0350968,0.2094434,0.1322960,0.5054660,0.5315527,0.1206312,0.6195726,0.6201764,0.1163663))
-
-reltable <- data.frame(
-  horizon = as.factor(c(1,1,1,3,3,3,6,6,6,1,1,1,3,3,3,6,6,6,1,1,1,3,3,3,6,6,6)), 
-  model = c("pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis", 
-            "pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis", 
-            "pes","cc","crisis","pes", "cc", "crisis","pes", "cc", "crisis"),
-  var = c(rep("pes",9),rep("Dune",9), rep("cpi",9)),
-  rmse = c(0.3962482,0.08773341,6.8372466,0.3595160,0.1585272,4.3886801,0.5579713,0.8850608,3.1768921,
-           0.5639840,0.7383306,0.3647817,0.9507732,0.9285637,0.8163448,1.0177657,0.9945709,1.0345714,
-           0.0350968,0.2094434,0.1322960,0.5054660,0.5315527,0.1206312,0.6195726,0.6201764,0.1163663))
+accs$model <- factor(accs$model, levels = c("PES","CC","Crisis"))
 
 
-rel_mean <- data.frame(var = c("pes","Dune","cpi"), mean_val = c(0.6226604, 0.4588791, 0.3884595))
+library(ggsci)
+ggplot(accs, aes(x=var, y=RMSE, fill=model)) +
+  geom_col(position = "dodge")+
+  scale_fill_startrek(palette = c("uniform"), alpha = 1)+
+  theme(axis.title.x = element_blank())+
+  theme_minimal()
 
-ggplot2::ggplot(reltable, aes(x=horizon, y = rmse, color=model, group=model))+
-  facet_wrap(~var)+
-  geom_point()+
-  geom_line()+
-  geom_hline(data=rel_mean, aes(yintercept = mean_val))
+# SAVE ####
+save(pesdat, ccdat, var6, vecm16var, vecm16, forecast_roll, forecast_roll_cc, forecast_roll_cov,
+     accs, file="../gsv_data/r_data/var.RData")
 
-#### OUT OF SAMPLE ####
+#load("./r_data/var.RData")
 
-#fcst <- forecast(var6, h=12, dumvar = crisis)
-pred_os <- predict(var6, n.ahead = 3)
-pred_os_d <- predict(var6d, n.ahead = 3, dumvar = matrix(c(0,0,0,0,0,0,0,0,0), nrow=3, ncol=1))
-plot(pred_os)
-fanchart(pred_os)
-forecast::autoplot(pred_os)
-
-plot(pesdat)
-#dygraph(pred)
-
-save(pesdat, ccdat, p, v, pred_os, var6, vecm16var, vecm16, forecast_roll, acc_pes, acc_Dune, acc_cpi, file="../gsv_data/r_data/var.RData")
-
-load("./r_data/var.RData")
+# ###### 
+# ######
+# ##############
