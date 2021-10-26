@@ -51,6 +51,8 @@ Dint <- diff(int)
 int <- window(int, start=start, end=end) %>% ts_ts()
 cc <- window(cc, start=start, end=end) %>% ts_ts()
 une <- window(une, start=start, end=end) %>% ts_ts()
+#une_test <- window(une, start=c(2007,1), end = c(2019,12))
+une_test <- window(une, start=as.Date("2010-01-01"), end = as.Date("2019-01-12"))
 pes <- window(pes, start=start, end=end) %>% ts_ts()
 cpi <- window(p, start=start, end=end) %>% ts_ts()
 crisis <- window(crisis, start=start, end=end) %>% ts_ts()
@@ -77,6 +79,7 @@ library(tseries)
 adf.test(int)
 adf.test(cc)
 adf.test(une)
+adf.test(une_test)
 adf.test(pes)
 adf.test(cpi)
 
@@ -248,28 +251,84 @@ vecm16var_cov <- vec2var(ctest_t, r=2)
 predict_roll_cov <- predict_rolling(vecm16cov, n.ahead = 6, nroll=roll)
 forecast_roll_cov <- accuracy_stat(predict_roll_cov)
 
+###### BEFORE CRISIS ########
+
+pesdat_bef <- window(pesdat, end = c(2019,1))
+vecm16bef <- tsDyn::VECM(pesdat_bef,  lag = lag, r = 2)
+ctest_t_bef <- ca.jo(pesdat_bef, type = "trace", ecdet = "const", K = 15)
+vecm16var_bef <- vec2var(ctest_t_bef, r=2)
+predict_roll_bef <- predict_rolling(vecm16bef, n.ahead = 6, nroll=roll)
+forecast_roll_bef <- accuracy_stat(predict_roll_bef)
+
+
+
+#### ARIMA and RANDOM WALK FCST ####
+
+fit <- auto.arima(pesdat[,"pes"])
+plot(forecast(fit,h=3))
+accuracy(fit)
+
+pes2 <- window(pesdat[,"pes"], end=c(2021,4))
+pesar2 <- auto.arima(pes2)
+pesfit2 <- forecast(pesar2, h=3)
+pes3 <- window(pesdat[,"pes"], start=c(2021,5))
+(accar1 <- accuracy(pesfit2, pes3))
+forecast_ar1 <- data.frame(var = "pes", ME = accar1[2,"ME"], RMSE = accar1[2,"RMSE"], MAE = accar1[2,"MAE"], MPE = accar1[2,"MPE"], MAPE = accar1[2,"MAPE"], model = "AR(1)")
+
+
+pes2 <- pes2
+pesrwfit <- rwf(pes2, h=3, drift = TRUE)
+pes3 <- pes3
+(accrw <- accuracy(pesrwfit, pes3))
+
+plot(pesrwfit)
+forecast_rw <- data.frame(var = "pes", ME = accrw[2,"ME"], RMSE = accrw[2,"RMSE"], MAE = accrw[2,"MAE"], MPE = accrw[2,"MPE"], MAPE = accrw[2,"MAPE"], model = "Random Walk")
+
 ###### ACCS FIGURE AND TABLE ##########
 
 forecast_roll$model <- "PES"
 forecast_roll_cc$model <- "CC"
-forecast_roll_cov$model <- "Crisis"
+forecast_roll_cov$model <- "COV19 Crisis"
+forecast_roll_bef$model <- "Before COV19"
 
 forecast_roll_cc$var[forecast_roll_cc$var=="cc"] <- "pes"
 
-accs <- rbind(forecast_roll, forecast_roll_cc, forecast_roll_cov)
+sds_pes <- data.frame(var = "pes", RMSE = sd(pesdat[,"pes"]), model = "sd")
+sds_Dune <- data.frame(var = "Dune", RMSE = sd(pesdat[,"Dune"]), model = "sd")
+sds_cpi <- data.frame(var = "cpi", RMSE = sd(pesdat[,"cpi"]), model = "sd")
+sds_global <- data.frame(var = "global", RMSE =0, model = "sd")
 
-accs$model <- factor(accs$model, levels = c("PES","CC","Crisis"))
+sds <- rbind(sds_pes, sds_Dune, sds_cpi, sds_global)
+
+accs <- rbind(forecast_roll, forecast_roll_cc, forecast_roll_bef, forecast_roll_cov, forecast_rw, forecast_ar1)
+accs <- accs %>% dplyr::select(var, model, RMSE)
+#accs <- rbind(accs, sds)
+
+accs$model <- factor(accs$model, levels = c("PES","CC","Before COV19","COV19 Crisis", "Random Walk", "AR(1)"))
+
+
 
 
 library(ggsci)
-ggplot(accs, aes(x=var, y=RMSE, fill=model)) +
+g1 <- ggplot(accs, aes(x=var, y=RMSE, fill=model)) +
   geom_col(position = "dodge")+
+  geom_text(aes(label = round(RMSE,2)),
+            position = position_dodge(0.9),
+            vjust = -.3,
+            size = 3)+
+  scale_fill_startrek(palette = c("uniform"), alpha = 1)+
+  theme_minimal()+
+  theme(axis.title.x = element_blank())
+g1
+
+ggplot(sds, aes(x=var, y=RMSE, fill=model)) +
+  geom_point(group=1)+
   scale_fill_startrek(palette = c("uniform"), alpha = 1)+
   theme(axis.title.x = element_blank())+
   theme_minimal()
 
 # SAVE ####
-save(pesdat, ccdat, var6, vecm16var, vecm16, forecast_roll, forecast_roll_cc, forecast_roll_cov,
+save(pesdat, ccdat, var6, vecm16var, vecm16, forecast_roll, forecast_roll_cc, forecast_roll_cov, forecast_roll_bef, forecast_rw, forecast_ar1,
      accs, file="../gsv_data/r_data/var.RData")
 
 #load("./r_data/var.RData")
