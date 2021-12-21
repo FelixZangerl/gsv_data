@@ -11,9 +11,9 @@ pes <- read_csv("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/ra
   #mutate(value = -value) %>%
   ts_xts()
 
-pes <- ts_frequency(pes, to = "month")
+pes_m <- ts_frequency(pes, to = "month")
 
-pes_w <- ts_frequency(pes, to = "week")
+pes_w <- ts_frequency(pes, to = "week") %>% ts_xts()
 
 cc <- read_csv("./real_data/consumer_confidence.csv")
 
@@ -131,10 +131,10 @@ wecon_oenb <- ts(wecon_oenb, start = c(2020,10), end = c(2021,47), frequency = 5
 
 
 
-### PLOT REL ####
+### PLOT REL MONTHLY ####
 
 ts_dygraphs(ts_c(
-  `Perceived Economic Situation` = pes,
+  `Perceived Economic Situation` = pes_m,
   `GDP growth` = gdp,
   `Consumer Confidence` = cc
 ))  %>%
