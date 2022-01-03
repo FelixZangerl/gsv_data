@@ -129,6 +129,11 @@ wecon_oenb <- read_delim("real_data/oenb_weekly_GDP-indicator.csv", delim = ";",
 wecon_oenb <- ts(wecon_oenb, start = c(2020,10), end = c(2021,47), frequency = 52) %>% ts_xts()
 
 
+### REALIGN WEEKLY ####
+
+pes_w <- pes_w[time(pes_w) >= "2020-01-01"]  
+wwwi <- wwwi[time(wwwi) >= "2020-01-01"]  
+
 
 
 ### PLOT REL MONTHLY ####
@@ -145,10 +150,11 @@ ts_dygraphs(ts_c(
 #  dyRangeSelector(dateWindow = c("2020-01-01", Sys.Date()))%>%
   dyOptions(useDataTimezone = TRUE)
 
+
 ### PLOT WEEKLY IND ####
 
 ts_dygraphs(ts_c(
-  `Perceived Economic Situation` = pes_w,
+  `Perceived Economic Situation` = pes_w * 5,
   `WIFO WWWI` = wwwi,
   `OECD Weekly Tracker` = oecd_w,
   `OENB Weekly Indicator` = wecon_oenb
