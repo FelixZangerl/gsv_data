@@ -1,4 +1,5 @@
 library(trendecon)
+library(tsbox)
 ### NEW INDICATORS MOMENT #####
 
 ##### CORONA #####
@@ -49,7 +50,15 @@ gastro <- c("Oeffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte"
 
 elektro <- c("Geizhals", "Mediamarkt", "e-tec", "willhaben", "Elektronik")
 
-##### GASTRONOMIE OFFLINE #####
+##### DIENSTLEISTUNG OFFLINE #####
+
+dienstleistung <- c("friseur", "massage")
+
+proc_keyword_init(dienstleistung[1], geo)
+proc_keyword_init(dienstleistung[2], geo)
+
+proc_index(dienstleistung, geo, "dienstleistung")
+
 ##### GASTRONOMIE OFFLINE #####
 ##### GASTRONOMIE OFFLINE #####
 ##### GASTRONOMIE OFFLINE #####
