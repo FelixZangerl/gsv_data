@@ -25,16 +25,6 @@ corona <- ts_pick(ts_prcomp(corona), "PC1")
 
 write_csv(corona, "./tsgt/corona.csv")
 
-dygraph(corona %>% ts_xts() ,group = "keywords")%>%
-  dyAxis("x", drawGrid = FALSE)%>%
-  dySeries("PC1", label = "Index")%>%
-  dyEvent("2021-6-10", "Easing measures - less social distancing", labelLoc = "bottom")%>%
-  dyEvent("2021-7-01", "Easing measures - night gastronomy", labelLoc = "bottom")%>%
-  dyEvent("2021-11-22", "Lockdown #4", labelLoc = "bottom")%>%
-  dyEvent("2021-12-12", "End of Lockdown #4", labelLoc = "bottom")%>%
-  dyRangeSelector(dateWindow = c("2021-10-01", today))%>%
-  dyOptions(useDataTimezone = TRUE)
-
 ##### SKI #####
 ski <- c("Urlaub Tirol", "Skiurlaub Österreich", "Ischgl", "Winterurlaub", "Skifahren Österreich")
 
@@ -45,7 +35,7 @@ ski <- ts_gtrends(
 )
 
 ts_plot(ski)
-ski <- ts_pick(ts_prcomp(gt_data), "PC1")
+ski <- ts_pick(ts_prcomp(ski), "PC1")
 
 write_csv(ski, "./tsgt/ski.csv")
 
@@ -58,9 +48,51 @@ handel_offline <- ts_gtrends(
 )
 
 ts_plot(handel_offline)
-handel_offline <- (ts_pick(ts_prcomp(gt_data), "PC1"))
+handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
 
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
+
+##### BAUMARKT UND GARTEN OFFLINE #####
+baumarkt <- c("dehner","b&b", "kika", "leiner", "bellaflora", "xxxlutz", "ikea")
+
+baumarkt <- ts_gtrends(
+  keyword = baumarkt,
+  geo     = "AT",
+)
+
+ts_plot(baumarkt)
+baumarkt <- (ts_pick(ts_prcomp(baumarkt), "PC1"))
+
+write_csv(baumarkt, "./tsgt/baumarkt.csv")
+
+##### ELEKTRO OFFLINE #####
+elektro <- c("Geizhals", "Mediamarkt", "e-tec", "willhaben", "Elektronik")
+
+elektro <- ts_gtrends(
+  keyword = elektro,
+  geo     = "AT",
+  time    = time
+)
+
+ts_plot(elektro)
+elektro <- (ts_pick(ts_prcomp(elektro), "PC1"))
+
+write_csv(elektro, "./tsgt/elektro.csv")
+
+
+##### KÖRERPERNAHE DIENSTLEISTUNG #####
+dienstleistung <- c("friseur", "massage", "nagelstudio")
+
+dienstleistung <- ts_gtrends(
+  keyword = dienstleistung,
+  geo     = "AT",
+  time    = time
+)
+
+ts_plot(dienstleistung)
+dienstleistung <- (ts_pick(ts_prcomp(dienstleistung), "PC1"))
+
+write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
 
 ##### GASTRONOMIE OFFLINE #####
 gastro <- c("Oeffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte")
@@ -76,24 +108,62 @@ gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 
 write_csv(gastro, "./tsgt/gastro.csv")
 
-##### ELEKTRO OFFLINE #####
-elektro <- c("Geizhals", "Mediamarkt", "e-tec", "willhaben", "Elektronik")
+##### EINKAUFSZENTREN #####
+ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Kärtner Straße", "Herrengasse", "Getreidegasse")
 
-##### DIENSTLEISTUNG OFFLINE #####
-dienstleistung <- c("friseur", "massage")
-
-dienstleistung <- ts_gtrends(
-  keyword = dienstleistung,
+ekz <- ts_gtrends(
+  keyword = ekz,
   geo     = "AT",
   time    = time
 )
 
-ts_plot(dienstleistung)
-dienstleistung <- (ts_pick(ts_prcomp(gt_data), "PC1"))
+ts_plot(ekz)
+ekz <- (ts_pick(ts_prcomp(ekz), "PC1"))
 
-write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
+write_csv(ekz, "./tsgt/ekz.csv")
 
-##### GASTRONOMIE OFFLINE #####
-##### GASTRONOMIE OFFLINE #####
-##### GASTRONOMIE OFFLINE #####
-##### GASTRONOMIE OFFLINE #####
+##### FITNESSCENTER #####
+fitness <- c("fitinn", "mcfit", "crossfit", "fitnesscenter", "john harris")
+
+fitness <- ts_gtrends(
+  keyword = fitness,
+  geo     = "AT",
+  time    = time
+)
+
+ts_plot(fitness)
+fitness <- (ts_pick(ts_prcomp(fitness), "PC1"))
+
+write_csv(fitness, "./tsgt/fitness.csv")
+
+##### BIBLIOTHEKEN #####
+bibliotheken <- c("bibliothek", "bib", "unibib", "städtische bücherei")
+
+bibliotheken <- ts_gtrends(
+  keyword = bibliotheken,
+  geo     = "AT",
+  time    = time
+)
+
+ts_plot(bibliotheken)
+bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
+
+write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
+
+##### MOBILITÄT AUTO #####
+mobilität_auto <- c("Tankpreisrechner", "kfz werkstatt", "Benzinpreis", "Autobahnvignette", "kfz Versicherung")
+
+mobilität_auto <- ts_gtrends(
+  keyword = mobilität_auto,
+  geo     = "AT",
+  time    = time
+)
+
+##### SEMANTISCHE CHECKS #####
+
+
+
+ts_plot(mobilität_auto)
+mobilität_auto <- (ts_pick(ts_prcomp(mobilität_auto), "PC1"))
+
+write_csv(mobilität_auto, "./tsgt/mobilität_auto.csv")
