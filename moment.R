@@ -10,7 +10,9 @@ geo <- "AT"
 today <- as.character(Sys.Date())
 time <- "today 3-m" 
 
-# constant 0: Krisenhilfen, Coronahilfen
+# constant 0: 
+# corona: Krisenhilfen, Coronahilfen
+# ekz: "Kärtner Straße"
 #corona <- c("Krisenhilfen", "Cofag", "Coronahilfen", "Stundungen", "Kredite", "Inzidenz", "Coronafaelle")
 corona <- c("Cofag", "Stundungen", "Kredite", "Inzidenz", "Coronafälle")
 
@@ -109,7 +111,7 @@ gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 write_csv(gastro, "./tsgt/gastro.csv")
 
 ##### EINKAUFSZENTREN #####
-ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Kärtner Straße", "Herrengasse", "Getreidegasse")
+ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Herrengasse", "Getreidegasse")
 
 ekz <- ts_gtrends(
   keyword = ekz,
@@ -151,7 +153,7 @@ bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
 write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
 
 ##### MOBILITÄT AUTO #####
-mobilität_auto <- c("Tankpreisrechner", "kfz werkstatt", "Benzinpreis", "Autobahnvignette", "kfz Versicherung")
+mobilität_auto <- c("Spritpreisrechner", "kfz werkstatt", "Benzinpreis", "Autobahnvignette", "kfz Versicherung")
 
 mobilität_auto <- ts_gtrends(
   keyword = mobilität_auto,
@@ -159,11 +161,9 @@ mobilität_auto <- ts_gtrends(
   time    = time
 )
 
-##### SEMANTISCHE CHECKS #####
-
-
-
 ts_plot(mobilität_auto)
 mobilität_auto <- (ts_pick(ts_prcomp(mobilität_auto), "PC1"))
 
 write_csv(mobilität_auto, "./tsgt/mobilität_auto.csv")
+
+##### SEMANTISCHE CHECKS #####
