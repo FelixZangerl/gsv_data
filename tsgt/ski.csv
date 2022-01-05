@@ -1,91 +1,451 @@
 id,time,value
-PC1,2021-10-04,1.7540153119525113
-PC1,2021-10-05,1.0724065513169094
-PC1,2021-10-06,0.9435192444073726
-PC1,2021-10-07,0.2919431522653279
-PC1,2021-10-08,0.9177417830254652
-PC1,2021-10-09,1.1755163968445392
-PC1,2021-10-10,-0.06061342611210296
-PC1,2021-10-11,0.8146319374978355
-PC1,2021-10-12,0.44731469045424843
-PC1,2021-10-13,0.6319041770783964
-PC1,2021-10-14,1.2012938582264465
-PC1,2021-10-15,0.6172608311929344
-PC1,2021-10-16,0.15225895486798446
-PC1,2021-10-17,1.1755163968445392
-PC1,2021-10-18,1.0724065513169094
-PC1,2021-10-19,-0.9568376407273068
-PC1,2021-10-20,-1.541511786143125
-PC1,2021-10-21,0.16305584535579096
-PC1,2021-10-22,1.6424156130640586
-PC1,2021-10-23,1.5147518509524838
-PC1,2021-10-24,-0.5969794808189184
-PC1,2021-10-25,-0.5058986348667075
-PC1,2021-10-26,0.315558892463509
-PC1,2021-10-27,0.08849942153315961
-PC1,2021-10-28,1.3301811651359836
-PC1,2021-10-29,0.15801078506062569
-PC1,2021-10-30,0.6599671692063911
-PC1,2021-10-31,1.1755163968445392
-PC1,2021-11-01,-0.5466783800594887
-PC1,2021-11-02,-0.22518483622143126
-PC1,2021-11-03,0.40145291133147915
-PC1,2021-11-04,-0.47270418878039805
-PC1,2021-11-05,0.7332600855980265
-PC1,2021-11-06,1.1872940230748987
-PC1,2021-11-07,-0.05287290865328082
-PC1,2021-11-08,-0.784319256109374
-PC1,2021-11-09,1.3604699441853896
-PC1,2021-11-10,-0.7617399556580503
-PC1,2021-11-11,0.9435192444073726
-PC1,2021-11-12,1.2012938582264465
-PC1,2021-11-13,0.7115220919702059
-PC1,2021-11-14,-0.4177910731499516
-PC1,2021-11-15,0.96929670578928
-PC1,2021-11-16,0.13913551990988776
-PC1,2021-11-17,1.6122017942395648
-PC1,2021-11-18,1.2012938582264465
-PC1,2021-11-19,0.6043727786884894
-PC1,2021-11-20,0.47022366075495337
-PC1,2021-11-21,1.516358257274796
-PC1,2021-11-22,0.5025602366556838
-PC1,2021-11-23,0.006812316215735345
-PC1,2021-11-24,-0.6645520457523855
-PC1,2021-11-25,0.3184273835447114
-PC1,2021-11-26,0.24524225634978544
-PC1,2021-11-27,0.4977550591448604
-PC1,2021-11-28,0.15234811185506478
-PC1,2021-11-29,1.098184012698817
-PC1,2021-11-30,-0.013063951207376138
-PC1,2021-12-01,0.5826347850606689
-PC1,2021-12-02,1.0724065513169094
-PC1,2021-12-03,-0.9659982454844042
-PC1,2021-12-04,-0.24979132093045428
-PC1,2021-12-05,1.0466290899350021
-PC1,2021-12-06,0.2710197177316928
-PC1,2021-12-07,-0.8756257636559169
-PC1,2021-12-08,0.18438605480788478
-PC1,2021-12-09,0.9435192444073726
-PC1,2021-12-10,-0.7068774788330567
-PC1,2021-12-11,-2.7016899975732955
-PC1,2021-12-12,-1.216854418652696
-PC1,2021-12-13,0.6857446305882985
-PC1,2021-12-14,-0.6094534370072456
-PC1,2021-12-15,-1.7822121867211056
-PC1,2021-12-16,-3.2019363137412706
-PC1,2021-12-17,0.15897981655031435
-PC1,2021-12-18,-1.6866858482296205
-PC1,2021-12-19,-0.9579011815042148
-PC1,2021-12-20,0.05953821565243461
-PC1,2021-12-21,-1.0674951813257554
-PC1,2021-12-22,0.033141181734858145
-PC1,2021-12-23,-0.720586416376085
-PC1,2021-12-24,-0.7811259816405992
-PC1,2021-12-25,-2.2007950677230474
-PC1,2021-12-26,-3.0282479965821687
-PC1,2021-12-27,-5.289110132604989
-PC1,2021-12-28,-1.1771593485519714
-PC1,2021-12-29,-3.1952337835945315
-PC1,2021-12-30,-1.2475649730547564
-PC1,2021-12-31,0.711522091970206
-PC1,2022-01-01,0.3248601712415949
+Urlaub Tirol,2021-10-05,0
+Urlaub Tirol,2021-10-06,0
+Urlaub Tirol,2021-10-07,0
+Urlaub Tirol,2021-10-08,0
+Urlaub Tirol,2021-10-09,0
+Urlaub Tirol,2021-10-10,0
+Urlaub Tirol,2021-10-11,100
+Urlaub Tirol,2021-10-12,0
+Urlaub Tirol,2021-10-13,0
+Urlaub Tirol,2021-10-14,0
+Urlaub Tirol,2021-10-15,56
+Urlaub Tirol,2021-10-16,65
+Urlaub Tirol,2021-10-17,0
+Urlaub Tirol,2021-10-18,0
+Urlaub Tirol,2021-10-19,0
+Urlaub Tirol,2021-10-20,0
+Urlaub Tirol,2021-10-21,0
+Urlaub Tirol,2021-10-22,0
+Urlaub Tirol,2021-10-23,0
+Urlaub Tirol,2021-10-24,0
+Urlaub Tirol,2021-10-25,0
+Urlaub Tirol,2021-10-26,0
+Urlaub Tirol,2021-10-27,0
+Urlaub Tirol,2021-10-28,54
+Urlaub Tirol,2021-10-29,0
+Urlaub Tirol,2021-10-30,0
+Urlaub Tirol,2021-10-31,0
+Urlaub Tirol,2021-11-01,0
+Urlaub Tirol,2021-11-02,0
+Urlaub Tirol,2021-11-03,0
+Urlaub Tirol,2021-11-04,0
+Urlaub Tirol,2021-11-05,0
+Urlaub Tirol,2021-11-06,63
+Urlaub Tirol,2021-11-07,0
+Urlaub Tirol,2021-11-08,0
+Urlaub Tirol,2021-11-09,0
+Urlaub Tirol,2021-11-10,0
+Urlaub Tirol,2021-11-11,0
+Urlaub Tirol,2021-11-12,0
+Urlaub Tirol,2021-11-13,0
+Urlaub Tirol,2021-11-14,0
+Urlaub Tirol,2021-11-15,0
+Urlaub Tirol,2021-11-16,46
+Urlaub Tirol,2021-11-17,0
+Urlaub Tirol,2021-11-18,0
+Urlaub Tirol,2021-11-19,0
+Urlaub Tirol,2021-11-20,0
+Urlaub Tirol,2021-11-21,62
+Urlaub Tirol,2021-11-22,48
+Urlaub Tirol,2021-11-23,0
+Urlaub Tirol,2021-11-24,0
+Urlaub Tirol,2021-11-25,0
+Urlaub Tirol,2021-11-26,0
+Urlaub Tirol,2021-11-27,0
+Urlaub Tirol,2021-11-28,0
+Urlaub Tirol,2021-11-29,0
+Urlaub Tirol,2021-11-30,48
+Urlaub Tirol,2021-12-01,0
+Urlaub Tirol,2021-12-02,0
+Urlaub Tirol,2021-12-03,0
+Urlaub Tirol,2021-12-04,0
+Urlaub Tirol,2021-12-05,0
+Urlaub Tirol,2021-12-06,0
+Urlaub Tirol,2021-12-07,0
+Urlaub Tirol,2021-12-08,57
+Urlaub Tirol,2021-12-09,0
+Urlaub Tirol,2021-12-10,0
+Urlaub Tirol,2021-12-11,0
+Urlaub Tirol,2021-12-12,0
+Urlaub Tirol,2021-12-13,0
+Urlaub Tirol,2021-12-14,0
+Urlaub Tirol,2021-12-15,0
+Urlaub Tirol,2021-12-16,0
+Urlaub Tirol,2021-12-17,0
+Urlaub Tirol,2021-12-18,0
+Urlaub Tirol,2021-12-19,0
+Urlaub Tirol,2021-12-20,0
+Urlaub Tirol,2021-12-21,0
+Urlaub Tirol,2021-12-22,64
+Urlaub Tirol,2021-12-23,70
+Urlaub Tirol,2021-12-24,0
+Urlaub Tirol,2021-12-25,0
+Urlaub Tirol,2021-12-26,0
+Urlaub Tirol,2021-12-27,0
+Urlaub Tirol,2021-12-28,64
+Urlaub Tirol,2021-12-29,0
+Urlaub Tirol,2021-12-30,0
+Urlaub Tirol,2021-12-31,0
+Urlaub Tirol,2022-01-01,0
+Urlaub Tirol,2022-01-02,0
+Skiurlaub Österreich,2021-10-05,0
+Skiurlaub Österreich,2021-10-06,0
+Skiurlaub Österreich,2021-10-07,27
+Skiurlaub Österreich,2021-10-08,0
+Skiurlaub Österreich,2021-10-09,0
+Skiurlaub Österreich,2021-10-10,32
+Skiurlaub Österreich,2021-10-11,0
+Skiurlaub Österreich,2021-10-12,53
+Skiurlaub Österreich,2021-10-13,0
+Skiurlaub Österreich,2021-10-14,0
+Skiurlaub Österreich,2021-10-15,0
+Skiurlaub Österreich,2021-10-16,0
+Skiurlaub Österreich,2021-10-17,33
+Skiurlaub Österreich,2021-10-18,0
+Skiurlaub Österreich,2021-10-19,0
+Skiurlaub Österreich,2021-10-20,0
+Skiurlaub Österreich,2021-10-21,27
+Skiurlaub Österreich,2021-10-22,0
+Skiurlaub Österreich,2021-10-23,35
+Skiurlaub Österreich,2021-10-24,34
+Skiurlaub Österreich,2021-10-25,0
+Skiurlaub Österreich,2021-10-26,65
+Skiurlaub Österreich,2021-10-27,0
+Skiurlaub Österreich,2021-10-28,58
+Skiurlaub Österreich,2021-10-29,0
+Skiurlaub Österreich,2021-10-30,0
+Skiurlaub Österreich,2021-10-31,0
+Skiurlaub Österreich,2021-11-01,0
+Skiurlaub Österreich,2021-11-02,0
+Skiurlaub Österreich,2021-11-03,27
+Skiurlaub Österreich,2021-11-04,0
+Skiurlaub Österreich,2021-11-05,0
+Skiurlaub Österreich,2021-11-06,0
+Skiurlaub Österreich,2021-11-07,0
+Skiurlaub Österreich,2021-11-08,0
+Skiurlaub Österreich,2021-11-09,0
+Skiurlaub Österreich,2021-11-10,0
+Skiurlaub Österreich,2021-11-11,0
+Skiurlaub Österreich,2021-11-12,0
+Skiurlaub Österreich,2021-11-13,0
+Skiurlaub Österreich,2021-11-14,0
+Skiurlaub Österreich,2021-11-15,0
+Skiurlaub Österreich,2021-11-16,0
+Skiurlaub Österreich,2021-11-17,0
+Skiurlaub Österreich,2021-11-18,0
+Skiurlaub Österreich,2021-11-19,0
+Skiurlaub Österreich,2021-11-20,0
+Skiurlaub Österreich,2021-11-21,0
+Skiurlaub Österreich,2021-11-22,0
+Skiurlaub Österreich,2021-11-23,0
+Skiurlaub Österreich,2021-11-24,0
+Skiurlaub Österreich,2021-11-25,0
+Skiurlaub Österreich,2021-11-26,27
+Skiurlaub Österreich,2021-11-27,0
+Skiurlaub Österreich,2021-11-28,0
+Skiurlaub Österreich,2021-11-29,26
+Skiurlaub Österreich,2021-11-30,0
+Skiurlaub Österreich,2021-12-01,0
+Skiurlaub Österreich,2021-12-02,0
+Skiurlaub Österreich,2021-12-03,0
+Skiurlaub Österreich,2021-12-04,0
+Skiurlaub Österreich,2021-12-05,0
+Skiurlaub Österreich,2021-12-06,26
+Skiurlaub Österreich,2021-12-07,54
+Skiurlaub Österreich,2021-12-08,0
+Skiurlaub Österreich,2021-12-09,0
+Skiurlaub Österreich,2021-12-10,59
+Skiurlaub Österreich,2021-12-11,100
+Skiurlaub Österreich,2021-12-12,32
+Skiurlaub Österreich,2021-12-13,0
+Skiurlaub Österreich,2021-12-14,27
+Skiurlaub Österreich,2021-12-15,0
+Skiurlaub Österreich,2021-12-16,0
+Skiurlaub Österreich,2021-12-17,0
+Skiurlaub Österreich,2021-12-18,0
+Skiurlaub Österreich,2021-12-19,38
+Skiurlaub Österreich,2021-12-20,0
+Skiurlaub Österreich,2021-12-21,0
+Skiurlaub Österreich,2021-12-22,69
+Skiurlaub Österreich,2021-12-23,0
+Skiurlaub Österreich,2021-12-24,0
+Skiurlaub Österreich,2021-12-25,0
+Skiurlaub Österreich,2021-12-26,0
+Skiurlaub Österreich,2021-12-27,70
+Skiurlaub Österreich,2021-12-28,0
+Skiurlaub Österreich,2021-12-29,0
+Skiurlaub Österreich,2021-12-30,0
+Skiurlaub Österreich,2021-12-31,0
+Skiurlaub Österreich,2022-01-01,0
+Skiurlaub Österreich,2022-01-02,38
+Ischgl,2021-10-05,14
+Ischgl,2021-10-06,5
+Ischgl,2021-10-07,14
+Ischgl,2021-10-08,5
+Ischgl,2021-10-09,12
+Ischgl,2021-10-10,17
+Ischgl,2021-10-11,19
+Ischgl,2021-10-12,37
+Ischgl,2021-10-13,9
+Ischgl,2021-10-14,10
+Ischgl,2021-10-15,5
+Ischgl,2021-10-16,6
+Ischgl,2021-10-17,12
+Ischgl,2021-10-18,9
+Ischgl,2021-10-19,9
+Ischgl,2021-10-20,20
+Ischgl,2021-10-21,0
+Ischgl,2021-10-22,15
+Ischgl,2021-10-23,18
+Ischgl,2021-10-24,12
+Ischgl,2021-10-25,20
+Ischgl,2021-10-26,11
+Ischgl,2021-10-27,5
+Ischgl,2021-10-28,10
+Ischgl,2021-10-29,5
+Ischgl,2021-10-30,18
+Ischgl,2021-10-31,18
+Ischgl,2021-11-01,11
+Ischgl,2021-11-02,14
+Ischgl,2021-11-03,23
+Ischgl,2021-11-04,0
+Ischgl,2021-11-05,5
+Ischgl,2021-11-06,12
+Ischgl,2021-11-07,22
+Ischgl,2021-11-08,14
+Ischgl,2021-11-09,9
+Ischgl,2021-11-10,10
+Ischgl,2021-11-11,19
+Ischgl,2021-11-12,10
+Ischgl,2021-11-13,17
+Ischgl,2021-11-14,11
+Ischgl,2021-11-15,9
+Ischgl,2021-11-16,22
+Ischgl,2021-11-17,19
+Ischgl,2021-11-18,9
+Ischgl,2021-11-19,5
+Ischgl,2021-11-20,12
+Ischgl,2021-11-21,6
+Ischgl,2021-11-22,0
+Ischgl,2021-11-23,0
+Ischgl,2021-11-24,28
+Ischgl,2021-11-25,18
+Ischgl,2021-11-26,9
+Ischgl,2021-11-27,22
+Ischgl,2021-11-28,5
+Ischgl,2021-11-29,13
+Ischgl,2021-11-30,18
+Ischgl,2021-12-01,23
+Ischgl,2021-12-02,23
+Ischgl,2021-12-03,20
+Ischgl,2021-12-04,22
+Ischgl,2021-12-05,5
+Ischgl,2021-12-06,14
+Ischgl,2021-12-07,14
+Ischgl,2021-12-08,26
+Ischgl,2021-12-09,19
+Ischgl,2021-12-10,20
+Ischgl,2021-12-11,17
+Ischgl,2021-12-12,45
+Ischgl,2021-12-13,37
+Ischgl,2021-12-14,14
+Ischgl,2021-12-15,19
+Ischgl,2021-12-16,32
+Ischgl,2021-12-17,18
+Ischgl,2021-12-18,42
+Ischgl,2021-12-19,13
+Ischgl,2021-12-20,33
+Ischgl,2021-12-21,34
+Ischgl,2021-12-22,42
+Ischgl,2021-12-23,52
+Ischgl,2021-12-24,33
+Ischgl,2021-12-25,78
+Ischgl,2021-12-26,65
+Ischgl,2021-12-27,49
+Ischgl,2021-12-28,96
+Ischgl,2021-12-29,84
+Ischgl,2021-12-30,100
+Ischgl,2021-12-31,77
+Ischgl,2022-01-01,94
+Ischgl,2022-01-02,59
+Winterurlaub,2021-10-05,0
+Winterurlaub,2021-10-06,0
+Winterurlaub,2021-10-07,0
+Winterurlaub,2021-10-08,0
+Winterurlaub,2021-10-09,0
+Winterurlaub,2021-10-10,0
+Winterurlaub,2021-10-11,0
+Winterurlaub,2021-10-12,29
+Winterurlaub,2021-10-13,0
+Winterurlaub,2021-10-14,0
+Winterurlaub,2021-10-15,0
+Winterurlaub,2021-10-16,76
+Winterurlaub,2021-10-17,0
+Winterurlaub,2021-10-18,0
+Winterurlaub,2021-10-19,29
+Winterurlaub,2021-10-20,31
+Winterurlaub,2021-10-21,0
+Winterurlaub,2021-10-22,0
+Winterurlaub,2021-10-23,0
+Winterurlaub,2021-10-24,0
+Winterurlaub,2021-10-25,0
+Winterurlaub,2021-10-26,0
+Winterurlaub,2021-10-27,0
+Winterurlaub,2021-10-28,0
+Winterurlaub,2021-10-29,0
+Winterurlaub,2021-10-30,38
+Winterurlaub,2021-10-31,0
+Winterurlaub,2021-11-01,34
+Winterurlaub,2021-11-02,29
+Winterurlaub,2021-11-03,0
+Winterurlaub,2021-11-04,0
+Winterurlaub,2021-11-05,62
+Winterurlaub,2021-11-06,0
+Winterurlaub,2021-11-07,0
+Winterurlaub,2021-11-08,29
+Winterurlaub,2021-11-09,0
+Winterurlaub,2021-11-10,0
+Winterurlaub,2021-11-11,0
+Winterurlaub,2021-11-12,0
+Winterurlaub,2021-11-13,0
+Winterurlaub,2021-11-14,0
+Winterurlaub,2021-11-15,0
+Winterurlaub,2021-11-16,27
+Winterurlaub,2021-11-17,0
+Winterurlaub,2021-11-18,0
+Winterurlaub,2021-11-19,0
+Winterurlaub,2021-11-20,0
+Winterurlaub,2021-11-21,0
+Winterurlaub,2021-11-22,0
+Winterurlaub,2021-11-23,0
+Winterurlaub,2021-11-24,87
+Winterurlaub,2021-11-25,29
+Winterurlaub,2021-11-26,0
+Winterurlaub,2021-11-27,0
+Winterurlaub,2021-11-28,0
+Winterurlaub,2021-11-29,0
+Winterurlaub,2021-11-30,0
+Winterurlaub,2021-12-01,0
+Winterurlaub,2021-12-02,0
+Winterurlaub,2021-12-03,0
+Winterurlaub,2021-12-04,0
+Winterurlaub,2021-12-05,0
+Winterurlaub,2021-12-06,0
+Winterurlaub,2021-12-07,30
+Winterurlaub,2021-12-08,33
+Winterurlaub,2021-12-09,0
+Winterurlaub,2021-12-10,0
+Winterurlaub,2021-12-11,37
+Winterurlaub,2021-12-12,0
+Winterurlaub,2021-12-13,0
+Winterurlaub,2021-12-14,0
+Winterurlaub,2021-12-15,0
+Winterurlaub,2021-12-16,100
+Winterurlaub,2021-12-17,0
+Winterurlaub,2021-12-18,0
+Winterurlaub,2021-12-19,0
+Winterurlaub,2021-12-20,0
+Winterurlaub,2021-12-21,36
+Winterurlaub,2021-12-22,75
+Winterurlaub,2021-12-23,0
+Winterurlaub,2021-12-24,0
+Winterurlaub,2021-12-25,0
+Winterurlaub,2021-12-26,0
+Winterurlaub,2021-12-27,39
+Winterurlaub,2021-12-28,38
+Winterurlaub,2021-12-29,38
+Winterurlaub,2021-12-30,0
+Winterurlaub,2021-12-31,0
+Winterurlaub,2022-01-01,0
+Winterurlaub,2022-01-02,0
+Skifahren Österreich,2021-10-05,0
+Skifahren Österreich,2021-10-06,17
+Skifahren Österreich,2021-10-07,0
+Skifahren Österreich,2021-10-08,0
+Skifahren Österreich,2021-10-09,0
+Skifahren Österreich,2021-10-10,0
+Skifahren Österreich,2021-10-11,0
+Skifahren Österreich,2021-10-12,0
+Skifahren Österreich,2021-10-13,36
+Skifahren Österreich,2021-10-14,18
+Skifahren Österreich,2021-10-15,0
+Skifahren Österreich,2021-10-16,0
+Skifahren Österreich,2021-10-17,0
+Skifahren Österreich,2021-10-18,0
+Skifahren Österreich,2021-10-19,0
+Skifahren Österreich,2021-10-20,0
+Skifahren Österreich,2021-10-21,0
+Skifahren Österreich,2021-10-22,0
+Skifahren Österreich,2021-10-23,0
+Skifahren Österreich,2021-10-24,0
+Skifahren Österreich,2021-10-25,0
+Skifahren Österreich,2021-10-26,21
+Skifahren Österreich,2021-10-27,0
+Skifahren Österreich,2021-10-28,0
+Skifahren Österreich,2021-10-29,0
+Skifahren Österreich,2021-10-30,0
+Skifahren Österreich,2021-10-31,0
+Skifahren Österreich,2021-11-01,0
+Skifahren Österreich,2021-11-02,17
+Skifahren Österreich,2021-11-03,17
+Skifahren Österreich,2021-11-04,0
+Skifahren Österreich,2021-11-05,0
+Skifahren Österreich,2021-11-06,22
+Skifahren Österreich,2021-11-07,41
+Skifahren Österreich,2021-11-08,34
+Skifahren Österreich,2021-11-09,18
+Skifahren Österreich,2021-11-10,36
+Skifahren Österreich,2021-11-11,17
+Skifahren Österreich,2021-11-12,19
+Skifahren Österreich,2021-11-13,0
+Skifahren Österreich,2021-11-14,0
+Skifahren Österreich,2021-11-15,0
+Skifahren Österreich,2021-11-16,16
+Skifahren Österreich,2021-11-17,0
+Skifahren Österreich,2021-11-18,0
+Skifahren Österreich,2021-11-19,18
+Skifahren Österreich,2021-11-20,0
+Skifahren Österreich,2021-11-21,64
+Skifahren Österreich,2021-11-22,17
+Skifahren Österreich,2021-11-23,34
+Skifahren Österreich,2021-11-24,0
+Skifahren Österreich,2021-11-25,0
+Skifahren Österreich,2021-11-26,17
+Skifahren Österreich,2021-11-27,0
+Skifahren Österreich,2021-11-28,20
+Skifahren Österreich,2021-11-29,0
+Skifahren Österreich,2021-11-30,17
+Skifahren Österreich,2021-12-01,17
+Skifahren Österreich,2021-12-02,17
+Skifahren Österreich,2021-12-03,37
+Skifahren Österreich,2021-12-04,62
+Skifahren Österreich,2021-12-05,0
+Skifahren Österreich,2021-12-06,34
+Skifahren Österreich,2021-12-07,18
+Skifahren Österreich,2021-12-08,0
+Skifahren Österreich,2021-12-09,0
+Skifahren Österreich,2021-12-10,19
+Skifahren Österreich,2021-12-11,87
+Skifahren Österreich,2021-12-12,0
+Skifahren Österreich,2021-12-13,0
+Skifahren Österreich,2021-12-14,0
+Skifahren Österreich,2021-12-15,36
+Skifahren Österreich,2021-12-16,20
+Skifahren Österreich,2021-12-17,44
+Skifahren Österreich,2021-12-18,26
+Skifahren Österreich,2021-12-19,100
+Skifahren Österreich,2021-12-20,21
+Skifahren Österreich,2021-12-21,43
+Skifahren Österreich,2021-12-22,0
+Skifahren Österreich,2021-12-23,73
+Skifahren Österreich,2021-12-24,92
+Skifahren Österreich,2021-12-25,29
+Skifahren Österreich,2021-12-26,81
+Skifahren Österreich,2021-12-27,46
+Skifahren Österreich,2021-12-28,67
+Skifahren Österreich,2021-12-29,22
+Skifahren Österreich,2021-12-30,0
+Skifahren Österreich,2021-12-31,0
+Skifahren Österreich,2022-01-01,0
+Skifahren Österreich,2022-01-02,25
