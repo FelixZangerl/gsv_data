@@ -22,7 +22,7 @@ corona <- ts_gtrends(
   time    = time
 )
 
-ts_plot(corona)
+#ts_plot(corona)
 corona <- ts_pick(ts_prcomp(corona), "PC1")
 
 write_csv(corona, "./tsgt/corona.csv")
@@ -32,11 +32,11 @@ ski <- c("Urlaub Tirol", "Skiurlaub Österreich", "Ischgl", "Winterurlaub", "Ski
 
 ski <- ts_gtrends(
   keyword = ski,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(ski)
+#ts_plot(ski)
 ski <- ts_pick(ts_prcomp(ski), "PC1")
 
 write_csv(ski, "./tsgt/ski.csv")
@@ -46,10 +46,10 @@ handel_offline <- c("Shopping Center", "SCS", "SCN", "EKZ", "Geschäft")
 
 handel_offline <- ts_gtrends(
   keyword = handel_offline,
-  geo     = "AT",
+  geo     = geo,
 )
 
-ts_plot(handel_offline)
+#ts_plot(handel_offline)
 handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
 
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
@@ -59,10 +59,10 @@ baumarkt <- c("dehner","b&b", "kika", "leiner", "bellaflora", "xxxlutz", "ikea")
 
 baumarkt <- ts_gtrends(
   keyword = baumarkt,
-  geo     = "AT",
+  geo     = geo,
 )
 
-ts_plot(baumarkt)
+#ts_plot(baumarkt)
 baumarkt <- (ts_pick(ts_prcomp(baumarkt), "PC1"))
 
 write_csv(baumarkt, "./tsgt/baumarkt.csv")
@@ -72,11 +72,11 @@ elektro <- c("Geizhals", "Mediamarkt", "e-tec", "willhaben", "Elektronik")
 
 elektro <- ts_gtrends(
   keyword = elektro,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(elektro)
+#ts_plot(elektro)
 elektro <- (ts_pick(ts_prcomp(elektro), "PC1"))
 
 write_csv(elektro, "./tsgt/elektro.csv")
@@ -87,11 +87,11 @@ dienstleistung <- c("friseur", "massage", "nagelstudio")
 
 dienstleistung <- ts_gtrends(
   keyword = dienstleistung,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(dienstleistung)
+#ts_plot(dienstleistung)
 dienstleistung <- (ts_pick(ts_prcomp(dienstleistung), "PC1"))
 
 write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
@@ -101,11 +101,11 @@ gastro <- c("Oeffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte"
 
 gastro <- ts_gtrends(
   keyword = gastro,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(gastro)
+#ts_plot(gastro)
 gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 
 write_csv(gastro, "./tsgt/gastro.csv")
@@ -115,11 +115,11 @@ ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Herrengasse", "Getreidegasse"
 
 ekz <- ts_gtrends(
   keyword = ekz,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(ekz)
+#ts_plot(ekz)
 ekz <- (ts_pick(ts_prcomp(ekz), "PC1"))
 
 write_csv(ekz, "./tsgt/ekz.csv")
@@ -129,11 +129,11 @@ fitness <- c("fitinn", "mcfit", "crossfit", "fitnesscenter", "john harris")
 
 fitness <- ts_gtrends(
   keyword = fitness,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(fitness)
+#ts_plot(fitness)
 fitness <- (ts_pick(ts_prcomp(fitness), "PC1"))
 
 write_csv(fitness, "./tsgt/fitness.csv")
@@ -143,27 +143,84 @@ bibliotheken <- c("bibliothek", "bib", "unibib", "städtische bücherei")
 
 bibliotheken <- ts_gtrends(
   keyword = bibliotheken,
-  geo     = "AT",
+  geo     = geo,
   time    = time
 )
 
-ts_plot(bibliotheken)
+#ts_plot(bibliotheken)
 bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
 
 write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
 
 ##### MOBILITÄT AUTO #####
-mobilität_auto <- c("Spritpreisrechner", "kfz werkstatt", "Benzinpreis", "Autobahnvignette", "kfz Versicherung")
+mobilitaet_auto <- c("Spritpreisrechner", "kfz werkstatt", "Benzinpreis", "Autobahnvignette", "kfz Versicherung")
 
-mobilität_auto <- ts_gtrends(
-  keyword = mobilität_auto,
-  geo     = "AT",
+mobilitaet_auto <- ts_gtrends(
+  keyword = mobilitaet_auto,
+  geo     = geo,
   time    = time
 )
 
-ts_plot(mobilität_auto)
-mobilität_auto <- (ts_pick(ts_prcomp(mobilität_auto), "PC1"))
+#ts_plot(mobilitaet_auto)
+mobilitaet_auto <- (ts_pick(ts_prcomp(mobilitaet_auto), "PC1"))
 
-write_csv(mobilität_auto, "./tsgt/mobilität_auto.csv")
+write_csv(mobilitaet_auto, "./tsgt/mobilitaet_auto.csv")
 
-##### SEMANTISCHE CHECKS #####
+### SEMANTISCHE CHECKS #####
+
+#### UMLAUTE ######
+umlaute <- c("Mobilität", "Mobilitaet")
+
+temp <- ts_gtrends(
+  keyword = umlaute,
+  geo     = geo,
+  time    = time
+)
+
+#ts_plot(temp)
+
+#### GROSSKLEIN ######
+großklein <- c("SCS", "scs")
+großklein <- c("KFZ", "kfz")
+großklein <- c("Skifahren", "skifahren")
+großklein <- c("Kurzarbeit", "kurzarbeit")
+
+temp <- ts_gtrends(
+  keyword = großklein,
+  geo     = geo,
+  time    = time
+)
+
+#ts_plot(temp)
+
+#### ABSTÄNDE ######
+abstaende <- c("Ski fahren", "Skifahren")
+
+temp <- ts_gtrends(
+  keyword = abstaende,
+  geo     = geo,
+  time    = time
+)
+
+#ts_plot(temp)
+
+#### SCHREIBWEISE ######
+schreibweise <- c("Schifahren", "Skifahren")
+
+temp <- ts_gtrends(
+  keyword = schreibweise,
+  geo     = geo,
+  time    = time
+)
+
+#ts_plot(temp)
+
+keywords <- c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz")
+
+temp <- ts_gtrends(
+  keyword = t,
+  geo     = geo,
+  time    = time
+)
+
+#ts_plot(temp)
