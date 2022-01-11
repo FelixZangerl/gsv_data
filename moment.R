@@ -22,6 +22,8 @@ corona <- ts_gtrends(
   time    = time
 )
 
+write_csv(corona, "./tsgt/corona_comp.csv")
+
 #ts_plot(corona)
 corona <- ts_pick(ts_prcomp(corona), "PC1")
 
