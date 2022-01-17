@@ -49,6 +49,7 @@ handel_offline <- c("Shopping Center", "SCS", "SCN", "EKZ", "Geschäft")
 handel_offline <- ts_gtrends(
   keyword = handel_offline,
   geo     = geo,
+  time = time
 )
 
 #ts_plot(handel_offline)
@@ -62,6 +63,7 @@ baumarkt <- c("dehner","b&b", "kika", "leiner", "bellaflora", "xxxlutz", "ikea")
 baumarkt <- ts_gtrends(
   keyword = baumarkt,
   geo     = geo,
+  time = time
 )
 
 #ts_plot(baumarkt)
