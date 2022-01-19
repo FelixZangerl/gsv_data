@@ -101,7 +101,7 @@ dienstleistung <- (ts_pick(ts_prcomp(dienstleistung), "PC1"))
 write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
 
 ##### GASTRONOMIE OFFLINE #####
-gastro <- c("Oeffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte")
+gastro <- c("Öffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte")
 
 gastro <- ts_gtrends(
   keyword = gastro,
