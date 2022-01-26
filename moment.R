@@ -41,7 +41,7 @@ ski <- ts_gtrends(
 
 
 ski <- ts_pick(ts_prcomp(ski), "PC1")
-ts_plot(ski)
+#ts_plot(ski)
 
 write_csv(ski, "./tsgt/ski.csv")
 
@@ -55,13 +55,13 @@ handel_offline <- ts_gtrends(
   category = 18 # Shopping
 )
 
-ts_plot(handel_offline)
+#ts_plot(handel_offline)
 handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
 
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
-baumarkt <- c("dehner","b&b", "kika", "leiner", "bellaflora", "xxxlutz", "ikea")
+baumarkt <- c("dehner", "kika", "bellaflora", "xxxlutz", "ikea")
 
 baumarkt <- ts_gtrends(
   keyword = baumarkt,
@@ -76,7 +76,7 @@ baumarkt <- (ts_pick(ts_prcomp(baumarkt), "PC1"))
 write_csv(baumarkt, "./tsgt/baumarkt.csv")
 
 ##### ELEKTRO OFFLINE #####
-elektro <- c("Geizhals", "Mediamarkt", "e-tec", "willhaben", "Elektronik")
+elektro <- c("Geizhals", "Mediamarkt", "willhaben", "Elektronik")
 
 elektro <- ts_gtrends(
   keyword = elektro,
@@ -86,7 +86,7 @@ elektro <- ts_gtrends(
 )
 
 elektro <- (ts_pick(ts_prcomp(elektro), "PC1"))
-ts_plot(elektro)
+#ts_plot(elektro)
 
 write_csv(elektro, "./tsgt/elektro.csv")
 
@@ -117,7 +117,7 @@ gastro <- ts_gtrends(
 )
 
 gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
-ts_plot(gastro)
+#ts_plot(gastro)
 
 write_csv(gastro, "./tsgt/gastro.csv")
 
@@ -147,7 +147,7 @@ fitness <- ts_gtrends(
 )
 
 fitness <- (ts_pick(ts_prcomp(fitness), "PC1"))
-ts_plot(fitness)
+#ts_plot(fitness)
 
 write_csv(fitness, "./tsgt/fitness.csv")
 
@@ -162,7 +162,7 @@ bibliotheken <- ts_gtrends(
 )
 
 bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
-ts_plot(bibliotheken)
+#ts_plot(bibliotheken)
 
 write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
 
@@ -176,6 +176,6 @@ mobilitaet_auto <- ts_gtrends(
 )
 
 mobilitaet_auto <- (ts_pick(ts_prcomp(mobilitaet_auto), "PC1"))
-ts_plot(mobilitaet_auto)
+#ts_plot(mobilitaet_auto)
 
 write_csv(mobilitaet_auto, "./tsgt/mobilitaet_auto.csv")
