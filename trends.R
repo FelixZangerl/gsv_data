@@ -1,5 +1,5 @@
-# install.packages("remotes")
-# remotes::install_github("trendecon/trendecon")
+#install.packages("remotes")
+#remotes::install_github("trendecon/trendecon")
 library(trendecon)
 library(tsbox)
 
