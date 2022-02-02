@@ -156,6 +156,8 @@ ts_dygraphs(ts_c(
 
 ##### standardise week format  #####
 
+wecon_oenb <- wecon_oenb %>% xts:::.drop.time()
+
 wwwi <- wwwi %>% ts_data.frame()
 wwwi$time <- wwwi$time %m-% days(3)
 wwwi <- wwwi %>% ts_xts()
@@ -164,17 +166,21 @@ oecd_w <- oecd_w %>% ts_data.frame()
 oecd_w$time <- oecd_w$time %m-% days(2)
 oecd_w <- oecd_w %>% ts_xts()
 
+pes_w <- pes_w %>% ts_data.frame()
+pes_w$time <- pes_w$time %m-% days(2)
+pes_w <- pes_w %>% ts_xts()
+
 
 ts_dygraphs(ts_c(
   `Perceived Economic Situation` = pes_w * 5,
   `WIFO WWWI` = wwwi,
-  `OECD Weekly Tracker` = oecd_w,
-  `OENB Weekly Indicator` = wecon_oenb
+  `OECD Weekly Tracker` = oecd_w
+#  `OENB Weekly Indicator` = wecon_oenb
 ))  %>%
   dySeries("Perceived Economic Situation", strokeWidth=3) %>%
   dySeries("WIFO WWWI", strokeWidth = 3) %>%
   dySeries("OECD Weekly Tracker", strokeWidth = 3) %>%
-  dySeries("OENB Weekly Indicator", strokeWidth = 3) %>%
+#  dySeries("OENB Weekly Indicator", strokeWidth = 3) %>%
   dyAxis("x", drawGrid = FALSE) %>%
     dyRangeSelector(dateWindow = c(as.Date("2020-01-01"), Sys.Date()))%>%
   dyOptions(useDataTimezone = TRUE)
