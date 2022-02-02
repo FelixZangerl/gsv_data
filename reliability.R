@@ -174,7 +174,7 @@ pes_w <- pes_w %>% ts_xts()
 ts_dygraphs(ts_c(
   `Perceived Economic Situation` = pes_w * 5,
   `WIFO WWWI` = wwwi,
-  `OECD Weekly Tracker` = oecd_w
+  `OECD Weekly Tracker` = oecd_w * 100
 #  `OENB Weekly Indicator` = wecon_oenb
 ))  %>%
   dySeries("Perceived Economic Situation", strokeWidth=3) %>%
