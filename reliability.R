@@ -2,6 +2,7 @@ rm(list=ls())
 library(tidyverse)
 library(tsbox)
 library(dygraphs)
+library(lubridate)
 
 ### COMPARE MAIN INDEX AND CONSUMER CONFIDENCE AND GDP
 
@@ -153,6 +154,17 @@ ts_dygraphs(ts_c(
 
 ### PLOT WEEKLY IND ####
 
+##### standardise week format  #####
+
+wwwi <- wwwi %>% ts_data.frame()
+wwwi$time <- wwwi$time %m-% days(3)
+wwwi <- wwwi %>% ts_xts()
+
+oecd_w <- oecd_w %>% ts_data.frame()
+oecd_w$time <- oecd_w$time %m-% days(2)
+oecd_w <- oecd_w %>% ts_xts()
+
+
 ts_dygraphs(ts_c(
   `Perceived Economic Situation` = pes_w * 5,
   `WIFO WWWI` = wwwi,
@@ -169,4 +181,4 @@ ts_dygraphs(ts_c(
 
 ### SAVE ####
 
-save(cc, gdp, pes, pes_w, wwwi, oecd_w, wecon_oenb, file = "../gsv_data/r_data/reliability.RData")
+save(cc, gdp, pes, pes_w, pes_m, wwwi, oecd_w, wecon_oenb, file = "../gsv_data/r_data/reliability.RData")
