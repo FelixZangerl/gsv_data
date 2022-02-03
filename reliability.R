@@ -48,11 +48,11 @@ library(readxl)
 #devtools::loadall("/home/mohr/FMAr")
 
 ###### OECD Weekly tracker ######
-#temp <- tempfile()
-#download.file("https://github.com/NicolasWoloszko/OECD-Weekly-Tracker/raw/main/Data/weekly_tracker.xlsx",
-#              destfile = temp)
-
-oecd <- read_xlsx("./real_data/weekly_tracker.xlsx", sheet = "Sheet1") %>%
+temp <- tempfile()
+download.file("https://github.com/NicolasWoloszko/OECD-Weekly-Tracker/raw/main/Data/weekly_tracker.xlsx",
+              destfile = temp)
+oecd <- read_xlsx(temp, sheet = "Sheet1") %>%
+#oecd <- read_xlsx("./real_data/weekly_tracker.xlsx", sheet = "Sheet1") %>%
   filter(region %in% c("Austria", "Germany","Italy", "France")) %>%
   #filter(region %in% c("Austria", "Germany", "Switzerland")) %>%
   group_by(region) %>%
@@ -71,44 +71,56 @@ oecd_w <- oecd %>%
 
 #unlink(temp)
 
+#ggplot(oecd %>% dplyr::filter(region=="Austria"), aes(x = date)) +
+#  geom_ribbon(aes(ymin = Low, ymax = High, fill = "a"), alpha = .3, show.legend = FALSE) +
+#  geom_line(aes(y = Tracker, colour = "a"), show.legend = FALSE) +
+#  geom_hline(yintercept = 0) +
+#  scale_y_continuous(labels = scales::percent) +
+#  scale_color_brewer(palette = "Dark2") +
+#  scale_fill_brewer(palette = "Dark2") +
+#  labs(title = "OECD Weekly GDP Tracker (Österreich)",
+#       subtitle = "Annualized growth rate",
+#       caption = paste("Quelle: OECD. Update:",max(oecd$date)),
+#       x="", y="") +
+#  theme_minimal()
 
-ggplot(oecd %>% dplyr::filter(region=="Austria"), aes(x = date)) +
-  geom_ribbon(aes(ymin = Low, ymax = High, fill = "a"), alpha = .3, show.legend = FALSE) +
-  geom_line(aes(y = Tracker, colour = "a"), show.legend = FALSE) +
-  geom_hline(yintercept = 0) +
-  scale_y_continuous(labels = scales::percent) +
-  scale_color_brewer(palette = "Dark2") +
-  scale_fill_brewer(palette = "Dark2") +
-  labs(title = "OECD Weekly GDP Tracker (Österreich)",
-       subtitle = "Annualized growth rate",
-       caption = paste("Quelle: OECD. Update:",max(oecd$date)),
-       x="", y="") +
-  theme_minimal()
-
-ggplot(oecd,
-       aes(x = date, y=Tracker, color = region)) +
-  #geom_ribbon(aes(ymin = Low, ymax = High, fill = "a"), alpha = .3, show.legend = FALSE) +
-  geom_line(size = 0.8) +
-  geom_hline(yintercept = 0) +
-  scale_y_continuous(labels = scales::percent) +
-  labs(title = "OECD Weekly GDP Tracker",
-       subtitle = "Annualized growth rate",
-       caption = paste("Quelle: OECD. Update:",max(data$date)),
-       x="", y="") +
-  scale_color_brewer(palette = "Dark2") +
-  theme_minimal() +
-  theme(legend.title = element_blank())
+#ggplot(oecd,
+#       aes(x = date, y=Tracker, color = region)) +
+#  #geom_ribbon(aes(ymin = Low, ymax = High, fill = "a"), alpha = .3, show.legend = FALSE) +
+#  geom_line(size = 0.8) +
+#  geom_hline(yintercept = 0) +
+#  scale_y_continuous(labels = scales::percent) +
+#  labs(title = "OECD Weekly GDP Tracker",
+#       subtitle = "Annualized growth rate",
+#       caption = paste("Quelle: OECD. Update:",max(data$date)),
+#       x="", y="") +
+#  scale_color_brewer(palette = "Dark2") +
+#  theme_minimal() +
+#  theme(legend.title = element_blank())
 
 ###### WWWI WIFO ######
-wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
+
+temp <- tempfile()
+download.file("https://www.wifo.ac.at/wwadocs/konjunktur/W%C3%B6chentlicherWIFOWirtschaftsindex/WIFO-Konjunkturberichterstattung_W%C3%B6chentlicherWIFOWirtschaftsindex.xlsx",
+              destfile = temp)
+
+t0 <- as.numeric(as.Date("2007-01-01"))
+t1 <- as.numeric(as.Date(Sys.Date()))
+t <- round((t1 - t0) / 7) - 1 # weeks passed since index started
+
+wwwi <- read_xlsx(temp, sheet = "WWWI",
+#wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
                   skip = 2, col_names = c("DATE", "VALUE", "cng_yavg", "cng_q"),
-                  col_types = c("date", "guess", "guess", "guess"), n_max = 778) %>%
+                  col_types = c("date", "guess", "guess", "guess"), n_max = t) %>%
   mutate(DATE = as.character(DATE)) %>%
   select(DATE, VALUE) %>%
   rename(time = DATE, value = VALUE) %>%
   ts_xts()
 
-wwwi_wifo <- read_excel("real_data/wwwi_wifo.xlsx", sheet = "WWWI")
+#wwwi_entstehung <- read_xlsx(temp, sheet = "Beiträge_Verwendung",
+#                             skip = 4, col_names = c("month", "DATE", "PrivatC","öff.C","Invest","" ))
+
+#wwwi_wifo <- read_excel("real_data/wwwi_wifo.xlsx", sheet = "WWWI")
 
 
 ###### OENB WEEKLY ######
@@ -122,20 +134,23 @@ wbip_oenb <- read_xlsx(path = "/mnt/home/wallnerm/data_repository/BIP_indikator_
   filter(!is.na(Gesamt)) %>%
   rename()
 
-wecon_oenb <- read_delim("real_data/oenb_weekly_GDP-indicator.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
+temp <- tempfile()
+download.file("https://www.oenb.at/dam/jcr:7c5ab44b-204d-4d45-a802-884d1019f7f5/data_on_the_weekly_GDP-indicator.csv",
+              destfile = temp)
+
+wecon_oenb <- read_delim(temp, delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
+#wecon_oenb <- read_delim("real_data/oenb_weekly_GDP-indicator.csv", delim = ";", escape_double = FALSE, trim_ws = TRUE) %>%
   drop_na(Calenderweek) %>%
   rename(time = Calenderweek, value = `Real GDP compared to pre-crisis levels`) %>%
   dplyr::select(time, value)
 
-wecon_oenb <- ts(wecon_oenb, start = c(2020,10), end = c(2021,47), frequency = 52) %>% ts_xts()
-
+#wecon_oenb <- ts(wecon_oenb, start = c(2020,10), end = c(2021,47), frequency = 52) %>% ts_xts()
+wecon_oenb <- ts(wecon_oenb, start = c(2020,10), frequency = 52) %>% ts_xts()
 
 ### REALIGN WEEKLY ####
 
 pes_w <- pes_w[time(pes_w) >= "2020-01-01"]  
 wwwi <- wwwi[time(wwwi) >= "2020-01-01"]  
-
-
 
 ### PLOT REL MONTHLY ####
 
