@@ -1,3 +1,5 @@
+rm(list=ls())
+load("./r_data/reliability.RData")
 library(trendecon)
 library(tsbox)
 library(tempdisagg)
@@ -55,10 +57,28 @@ handel_offline <- ts_gtrends(
   category = 18 # Shopping
 )
 
-#ts_plot(handel_offline)
+ts_plot(handel_offline)
 handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
-
+handel_offline_w <- handel_offline %>% ts_frequency("week")
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
+
+start <- min(handel_offline_w$time)
+end <- max(time(handel_vs_vj))
+
+handel_vs_vj <- handel_vs_vj %>% ts_data.frame()
+handel_vs_vj$value <- as.numeric(handel_vs_vj$value)
+handel_vs_vj$id <- "WWWI_Handel"
+handel_vs_vj <- handel_vs_vj %>% filter(time >= start)
+#a <- a %>% ts_xts()
+
+handel_offline_w <- handel_offline_w %>% ts_data.frame()
+handel_offline_w <- handel_offline_w %>% filter(time <= end)
+#handel_offline_w <- handel_offline_w %>% ts_xts()
+
+b <- rbind(handel_vs_vj, handel_offline_w)
+b <- b %>% ts_xts()
+
+dygraph(b)
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
 baumarkt <- c("dehner", "kika", "bellaflora", "xxxlutz", "ikea")
@@ -120,6 +140,26 @@ gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 #ts_plot(gastro)
 
 write_csv(gastro, "./tsgt/gastro.csv")
+gastro_w <- gastro %>% ts_frequency("week")
+
+start <- min(gastro_w$time)
+end <- max(time(gastro_vs_vj))
+
+gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
+gastro_vs_vj$value <- as.numeric(gastro_vs_vj$value)
+gastro_vs_vj$id <- "WWWI_Gastro"
+gastro_vs_vj <- gastro_vs_vj %>% filter(time >= start)
+#a <- a %>% ts_xts()
+
+gastro_w <- gastro_w %>% ts_data.frame()
+gastro_w <- gastro_w %>% filter(time <= end)
+#gastro_w <- gastro_w %>% ts_xts()
+
+b <- rbind(gastro_vs_vj, gastro_w)
+b <- b %>% ts_xts()
+
+dygraph(b)
+
 
 ##### EINKAUFSZENTREN #####
 ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Herrengasse", "Getreidegasse")

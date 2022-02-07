@@ -3,6 +3,9 @@ library(tidyverse)
 library(tsbox)
 library(dygraphs)
 library(lubridate)
+#library(dplyr)
+#library(ggplot2)
+library(readxl)
 
 ### COMPARE MAIN INDEX AND CONSUMER CONFIDENCE AND GDP
 
@@ -42,9 +45,7 @@ gdp <- gdp %>% ts_frequency(to = "month")
 
 ## OECD
 
-library(dplyr)
-library(ggplot2)
-library(readxl)
+
 #devtools::loadall("/home/mohr/FMAr")
 
 ###### OECD Weekly tracker ######
@@ -106,19 +107,42 @@ download.file("https://www.wifo.ac.at/wwadocs/konjunktur/W%C3%B6chentlicherWIFOW
 
 t0 <- as.numeric(as.Date("2007-01-01"))
 t1 <- as.numeric(as.Date(Sys.Date()))
-t <- round((t1 - t0) / 7) - 1 # weeks passed since index started
+t <- round((t1 - t0) / 7) - 3 # weeks passed since index started
 
 wwwi <- read_xlsx(temp, sheet = "WWWI",
 #wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
                   skip = 2, col_names = c("DATE", "VALUE", "cng_yavg", "cng_q"),
-                  col_types = c("date", "guess", "guess", "guess"), n_max = t) %>%
+                  #col_types = c("date", "guess", "guess", "guess"), 
+                  n_max = t) %>%
   mutate(DATE = as.character(DATE)) %>%
   select(DATE, VALUE) %>%
   rename(time = DATE, value = VALUE) %>%
   ts_xts()
 
-#wwwi_entstehung <- read_xlsx(temp, sheet = "Beiträge_Verwendung",
-#                             skip = 4, col_names = c("month", "DATE", "PrivatC","öff.C","Invest","" ))
+wwwi_entstehung <- read_xlsx(temp, sheet = "Beiträge_Entstehung",
+                             skip = 3)
+
+wwwi_e_names <- c("Month/Year", "KW", "WWWI",
+                  "Produzierender Bereich (ÖNACE A_F)"	,"Handel (ÖNACE G)"	,"Verkehr (ÖNACE H)"	,"Beherbergung und Gastronomie (ÖNACE I)"	,"Restliche Dienstleistungen (ÖNACE J_T)",	"Saldo Gütersteuern / -subventionen",	"empty",	
+                  "WWWI",	"Produzierender Bereich (ÖNACE A_F)", "Handel (ÖNACE G)",	"Verkehr (ÖNACE H)",	"Beherbergung und Gastronomie (ÖNACE I)",	"Restliche Dienstleistungen (ÖNACE J_T)",	"Saldo Gütersteuern / -subventionen")
+
+handel_vs_vj <- na.omit(wwwi_entstehung[[5]]) #starts KW2 2020
+handel_vs_vj <- handel_vs_vj[-1]
+handel_vs_vj <- ts(handel_vs_vj, start = c(2020,2), frequency = 53) %>% ts_xts() #52.17857
+handel_vs_vj <- handel_vs_vj %>% xts:::.drop.time()
+
+handel_vs_vj <- handel_vs_vj %>% ts_data.frame()
+handel_vs_vj$time <- handel_vs_vj$time %m+% days(1)
+handel_vs_vj <- handel_vs_vj %>% ts_xts()
+
+gastro_vs_vj <- na.omit(wwwi_entstehung[[7]]) #starts KW2 2020
+gastro_vs_vj <- gastro_vs_vj[-1]
+gastro_vs_vj <- ts(gastro_vs_vj, start = c(2020,2), frequency = 53) %>% ts_xts() #52.17857
+gastro_vs_vj <- gastro_vs_vj %>% xts:::.drop.time()
+
+gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
+gastro_vs_vj$time <- gastro_vs_vj$time %m+% days(1)
+gastro_vs_vj <- gastro_vs_vj %>% ts_xts()
 
 #wwwi_wifo <- read_excel("real_data/wwwi_wifo.xlsx", sheet = "WWWI")
 
@@ -189,8 +213,8 @@ pes_w <- pes_w %>% ts_xts()
 ts_dygraphs(ts_c(
   `Perceived Economic Situation` = pes_w * 5,
   `WIFO WWWI` = wwwi,
-  `OECD Weekly Tracker` = oecd_w * 100
-#  `OENB Weekly Indicator` = wecon_oenb
+  `OECD Weekly Tracker` = oecd_w * 100,
+ # `OENB Weekly Indicator` = wecon_oenb
 ))  %>%
   dySeries("Perceived Economic Situation", strokeWidth=3) %>%
   dySeries("WIFO WWWI", strokeWidth = 3) %>%
@@ -202,4 +226,6 @@ ts_dygraphs(ts_c(
 
 ### SAVE ####
 
-save(cc, gdp, pes, pes_w, pes_m, wwwi, oecd_w, wecon_oenb, file = "../gsv_data/r_data/reliability.RData")
+save(cc, gdp, pes, pes_w, pes_m, 
+     wwwi, oecd_w, wecon_oenb, 
+     handel_vs_vj, gastro_vs_vj, file = "../gsv_data/r_data/reliability.RData")
