@@ -3,6 +3,7 @@ load("./r_data/reliability.RData")
 library(trendecon)
 library(tsbox)
 library(tempdisagg)
+library(dplyr)
 library(readr)
 ### NEW INDICATORS MOMENT #####
 
@@ -24,11 +25,14 @@ corona <- ts_gtrends(
   time    = time
 )
 
+
 write_csv(corona, "./tsgt/corona_comp.csv")
 
 #ts_plot(corona)
 corona <- ts_pick(ts_prcomp(corona), "PC1")
 
+tmp <- read_csv("./tsgt/corona.csv")
+corona <- left_join(tmp, corona)
 write_csv(corona, "./tsgt/corona.csv")
 
 ##### SKI #####
@@ -45,6 +49,8 @@ ski <- ts_gtrends(
 ski <- ts_pick(ts_prcomp(ski), "PC1")
 #ts_plot(ski)
 
+tmp <- read_csv("./tsgt/ski.csv")
+ski <- left_join(tmp, ski)
 write_csv(ski, "./tsgt/ski.csv")
 
 ##### HANDEL OFFLINE #####
@@ -59,8 +65,14 @@ handel_offline <- ts_gtrends(
 
 ts_plot(handel_offline)
 handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
-handel_offline_w <- handel_offline %>% ts_frequency("week")
+
+tmp <- read_csv("./tsgt/handel_offline.csv")
+handel_offline <- left_join(tmp, handel_offline)
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
+
+
+###### WEEKLY DATA COMPARISION ######
+handel_offline_w <- handel_offline %>% ts_frequency("week")
 
 start <- min(handel_offline_w$time)
 end <- max(time(handel_vs_vj))
@@ -76,9 +88,10 @@ handel_offline_w <- handel_offline_w %>% filter(time <= end)
 #handel_offline_w <- handel_offline_w %>% ts_xts()
 
 b <- rbind(handel_vs_vj, handel_offline_w)
-b <- b %>% ts_xts()
+#b <- b %>% ts_xts()
 
-dygraph(b)
+write_csv(b, file = "./tsgt/handel_offline_vgr")
+
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
 baumarkt <- c("dehner", "kika", "bellaflora", "xxxlutz", "ikea")
@@ -93,6 +106,8 @@ baumarkt <- ts_gtrends(
 #ts_plot(baumarkt)
 baumarkt <- (ts_pick(ts_prcomp(baumarkt), "PC1"))
 
+tmp <- read_csv("./tsgt/baumarkt.csv")
+baumarkt <- left_join(tmp, baumarkt)
 write_csv(baumarkt, "./tsgt/baumarkt.csv")
 
 ##### ELEKTRO OFFLINE #####
@@ -108,6 +123,8 @@ elektro <- ts_gtrends(
 elektro <- (ts_pick(ts_prcomp(elektro), "PC1"))
 #ts_plot(elektro)
 
+tmp <- read_csv("./tsgt/elektro.csv")
+elektro <- left_join(tmp, elektro)
 write_csv(elektro, "./tsgt/elektro.csv")
 
 
@@ -124,6 +141,8 @@ dienstleistung <- ts_gtrends(
 dienstleistung <- (ts_pick(ts_prcomp(dienstleistung), "PC1"))
 #ts_plot(dienstleistung)
 
+tmp <- read_csv("./tsgt/dienstleistung.csv")
+dienstleistung <- left_join(tmp, dienstleistung)
 write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
 
 ##### GASTRONOMIE OFFLINE #####
@@ -139,7 +158,11 @@ gastro <- ts_gtrends(
 gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 #ts_plot(gastro)
 
+tmp <- read_csv("./tsgt/gastro.csv")
+gastro <- left_join(tmp, gastro)
 write_csv(gastro, "./tsgt/gastro.csv")
+
+###### WEEKLY DATA COMPARISION ######
 gastro_w <- gastro %>% ts_frequency("week")
 
 start <- min(gastro_w$time)
@@ -156,10 +179,11 @@ gastro_w <- gastro_w %>% filter(time <= end)
 #gastro_w <- gastro_w %>% ts_xts()
 
 b <- rbind(gastro_vs_vj, gastro_w)
-b <- b %>% ts_xts()
+#b <- b %>% ts_xts()
 
-dygraph(b)
+write_csv(b, file = "./tsgt/gastro_vgr")
 
+#dygraph(b)
 
 ##### EINKAUFSZENTREN #####
 ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Herrengasse", "Getreidegasse")
@@ -174,6 +198,8 @@ ekz <- ts_gtrends(
 #ts_plot(ekz)
 ekz <- (ts_pick(ts_prcomp(ekz), "PC1"))
 
+tmp <- read_csv("./tsgt/ekz.csv")
+ekz <- left_join(tmp, ekz)
 write_csv(ekz, "./tsgt/ekz.csv")
 
 ##### FITNESSCENTER #####
@@ -189,6 +215,8 @@ fitness <- ts_gtrends(
 fitness <- (ts_pick(ts_prcomp(fitness), "PC1"))
 #ts_plot(fitness)
 
+tmp <- read_csv("./tsgt/fitness.csv")
+fitness <- left_join(tmp, fitness)
 write_csv(fitness, "./tsgt/fitness.csv")
 
 ##### BIBLIOTHEKEN #####
@@ -204,6 +232,8 @@ bibliotheken <- ts_gtrends(
 bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
 #ts_plot(bibliotheken)
 
+tmp <- read_csv("./tsgt/bibliotheken.csv")
+bibliotheken <- left_join(tmp, bibliotheken)
 write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
 
 ##### MOBILITÄT AUTO #####
@@ -218,4 +248,6 @@ mobilitaet_auto <- ts_gtrends(
 mobilitaet_auto <- (ts_pick(ts_prcomp(mobilitaet_auto), "PC1"))
 #ts_plot(mobilitaet_auto)
 
+tmp <- read_csv("./tsgt/mobilitaet_auto.csv")
+mobilitaet_auto <- left_join(tmp, mobilitaet_auto)
 write_csv(mobilitaet_auto, "./tsgt/mobilitaet_auto.csv")
