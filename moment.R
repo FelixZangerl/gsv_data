@@ -93,7 +93,7 @@ handel_offline_w <- handel_offline_w %>% filter(time <= end)
 b <- rbind(handel_vs_vj, handel_offline_w)
 #b <- b %>% ts_xts()
 
-write_csv(b, file = "./tsgt/handel_offline_vgr")
+write_csv(b, file = "./tsgt/handel_offline_vgr.csv")
 
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
@@ -188,7 +188,7 @@ gastro_w <- gastro_w %>% filter(time <= end)
 b <- rbind(gastro_vs_vj, gastro_w)
 #b <- b %>% ts_xts()
 
-write_csv(b, file = "./tsgt/gastro_vgr")
+write_csv(b, file = "./tsgt/gastro_vgr.csv")
 
 #dygraph(b)
 
