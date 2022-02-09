@@ -90,10 +90,10 @@ handel_offline_w <- handel_offline_w %>% ts_data.frame()
 handel_offline_w <- handel_offline_w %>% filter(time <= end)
 #handel_offline_w <- handel_offline_w %>% ts_xts()
 
-b <- rbind(handel_vs_vj, handel_offline_w)
+a <- rbind(handel_vs_vj, handel_offline_w)
 #b <- b %>% ts_xts()
 
-write_csv(b, file = "./tsgt/handel_offline_vgr.csv")
+write_csv(a, file = "./tsgt/handel_offline_vgr.csv")
 
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
