@@ -32,7 +32,8 @@ write_csv(corona, "./tsgt/corona_comp.csv")
 corona <- ts_pick(ts_prcomp(corona), "PC1")
 
 tmp <- read_csv("./tsgt/corona.csv")
-corona <- left_join(tmp, corona)
+corona <- full_join(corona, tmp)
+corona <- corona[!duplicated(corona$time),]
 write_csv(corona, "./tsgt/corona.csv")
 
 ##### SKI #####
@@ -50,7 +51,9 @@ ski <- ts_pick(ts_prcomp(ski), "PC1")
 #ts_plot(ski)
 
 tmp <- read_csv("./tsgt/ski.csv")
-ski <- left_join(tmp, ski)
+ski <- full_join(tmp, ski)
+ski <- ski[!duplicated(ski$time),]
+
 write_csv(ski, "./tsgt/ski.csv")
 
 ##### HANDEL OFFLINE #####
@@ -67,9 +70,9 @@ ts_plot(handel_offline)
 handel_offline <- (ts_pick(ts_prcomp(handel_offline), "PC1"))
 
 tmp <- read_csv("./tsgt/handel_offline.csv")
-handel_offline <- left_join(tmp, handel_offline)
+handel_offline <- full_join(handel_offline, tmp)
+handel_offline <- handel_offline[!duplicated(handel_offline$time),]
 write_csv(handel_offline, "./tsgt/handel_offline.csv")
-
 
 ###### WEEKLY DATA COMPARISION ######
 handel_offline_w <- handel_offline %>% ts_frequency("week")
@@ -107,7 +110,8 @@ baumarkt <- ts_gtrends(
 baumarkt <- (ts_pick(ts_prcomp(baumarkt), "PC1"))
 
 tmp <- read_csv("./tsgt/baumarkt.csv")
-baumarkt <- left_join(tmp, baumarkt)
+baumarkt <- full_join(baumarkt, tmp)
+baumarkt <- baumarkt[!duplicated(baumarkt$time),]
 write_csv(baumarkt, "./tsgt/baumarkt.csv")
 
 ##### ELEKTRO OFFLINE #####
@@ -124,7 +128,8 @@ elektro <- (ts_pick(ts_prcomp(elektro), "PC1"))
 #ts_plot(elektro)
 
 tmp <- read_csv("./tsgt/elektro.csv")
-elektro <- left_join(tmp, elektro)
+elektro <- full_join(elektro, tmp)
+elektro <- elektro[!duplicated(elektro$time),]
 write_csv(elektro, "./tsgt/elektro.csv")
 
 
@@ -142,7 +147,8 @@ dienstleistung <- (ts_pick(ts_prcomp(dienstleistung), "PC1"))
 #ts_plot(dienstleistung)
 
 tmp <- read_csv("./tsgt/dienstleistung.csv")
-dienstleistung <- left_join(tmp, dienstleistung)
+dienstleistung <- full_join(dienstleistung, tmp)
+dienstleistung <- dienstleistung[!duplicated(dienstleistung$time),]
 write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
 
 ##### GASTRONOMIE OFFLINE #####
@@ -159,7 +165,8 @@ gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
 #ts_plot(gastro)
 
 tmp <- read_csv("./tsgt/gastro.csv")
-gastro <- left_join(tmp, gastro)
+gastro <- full_join(gastro, tmp)
+gastro <- gastro[!duplicated(gastro$time),]
 write_csv(gastro, "./tsgt/gastro.csv")
 
 ###### WEEKLY DATA COMPARISION ######
@@ -199,7 +206,8 @@ ekz <- ts_gtrends(
 ekz <- (ts_pick(ts_prcomp(ekz), "PC1"))
 
 tmp <- read_csv("./tsgt/ekz.csv")
-ekz <- left_join(tmp, ekz)
+ekz <- full_join(ekz, tmp)
+ekz <- ekz[!duplicated(ekz$time),]
 write_csv(ekz, "./tsgt/ekz.csv")
 
 ##### FITNESSCENTER #####
@@ -216,7 +224,8 @@ fitness <- (ts_pick(ts_prcomp(fitness), "PC1"))
 #ts_plot(fitness)
 
 tmp <- read_csv("./tsgt/fitness.csv")
-fitness <- left_join(tmp, fitness)
+fitness <- full_join(fitness, tmp)
+fitness <- fitness[!duplicated(fitness$time),]
 write_csv(fitness, "./tsgt/fitness.csv")
 
 ##### BIBLIOTHEKEN #####
@@ -233,7 +242,8 @@ bibliotheken <- (ts_pick(ts_prcomp(bibliotheken), "PC1"))
 #ts_plot(bibliotheken)
 
 tmp <- read_csv("./tsgt/bibliotheken.csv")
-bibliotheken <- left_join(tmp, bibliotheken)
+bibliotheken <- full_join(bibliotheken, tmp)
+bibliotheken <- bibliotheken[!duplicated(bibliotheken$time),]
 write_csv(bibliotheken, "./tsgt/bibliotheken.csv")
 
 ##### MOBILITÄT AUTO #####
@@ -249,5 +259,6 @@ mobilitaet_auto <- (ts_pick(ts_prcomp(mobilitaet_auto), "PC1"))
 #ts_plot(mobilitaet_auto)
 
 tmp <- read_csv("./tsgt/mobilitaet_auto.csv")
-mobilitaet_auto <- left_join(tmp, mobilitaet_auto)
+mobilitaet_auto <- full_join(mobilitaet_auto, tmp)
+mobilitaet_auto <- mobilitaet_auto[!duplicated(mobilitaet_auto$time),]
 write_csv(mobilitaet_auto, "./tsgt/mobilitaet_auto.csv")
