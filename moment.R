@@ -25,7 +25,6 @@ corona <- ts_gtrends(
   time    = time
 )
 
-
 write_csv(corona, "./tsgt/corona_comp.csv")
 
 #ts_plot(corona)
@@ -78,7 +77,9 @@ write_csv(handel_offline, "./tsgt/handel_offline.csv")
 handel_offline_w <- handel_offline %>% ts_frequency("week")
 
 start <- min(handel_offline_w$time)
-end <- max(time(handel_vs_vj))
+tmp <- handel_vs_vj %>% ts_data.frame()
+end <- max(tmp$time)
+#cat("/n!!!!!!!!",end,"/n")
 
 handel_vs_vj <- handel_vs_vj %>% ts_data.frame()
 handel_vs_vj$value <- as.numeric(handel_vs_vj$value)
@@ -87,14 +88,16 @@ handel_vs_vj <- handel_vs_vj %>% filter(time >= start)
 #a <- a %>% ts_xts()
 
 handel_offline_w <- handel_offline_w %>% ts_data.frame()
-handel_offline_w <- handel_offline_w %>% filter(time <= end)
+handel_offline_w <- handel_offline_w %>% dplyr::filter(time <= end) # problem here 0 rows
 #handel_offline_w <- handel_offline_w %>% ts_xts()
 
 a <- rbind(handel_vs_vj, handel_offline_w)
 #b <- b %>% ts_xts()
 
+cat("Write a with", nrow(a), "\n")
+cat("handel_vs_vj with" ,nrow(handel_vs_vj), "rows")
+cat("handel_offline_w with" ,nrow(handel_offline_w), "rows")
 write_csv(a, file = "./tsgt/handel_offline_vgr.csv")
-
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
 baumarkt <- c("dehner", "kika", "bellaflora", "xxxlutz", "ikea")
@@ -174,6 +177,7 @@ gastro_w <- gastro %>% ts_frequency("week")
 
 start <- min(gastro_w$time)
 end <- max(time(gastro_vs_vj))
+#cat("/n!!!!!!!!",end,"/n")
 
 gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
 gastro_vs_vj$value <- as.numeric(gastro_vs_vj$value)
@@ -182,12 +186,13 @@ gastro_vs_vj <- gastro_vs_vj %>% filter(time >= start)
 #a <- a %>% ts_xts()
 
 gastro_w <- gastro_w %>% ts_data.frame()
-gastro_w <- gastro_w %>% filter(time <= end)
+gastro_w <- gastro_w %>% dplyr::filter(time <= end)
 #gastro_w <- gastro_w %>% ts_xts()
 
 b <- rbind(gastro_vs_vj, gastro_w)
 #b <- b %>% ts_xts()
 
+cat("Write b with", nrow(b), " \n")
 write_csv(b, file = "./tsgt/gastro_vgr.csv")
 
 #dygraph(b)
@@ -262,3 +267,5 @@ tmp <- read_csv("./tsgt/mobilitaet_auto.csv")
 mobilitaet_auto <- full_join(mobilitaet_auto, tmp)
 mobilitaet_auto <- mobilitaet_auto[!duplicated(mobilitaet_auto$time),]
 write_csv(mobilitaet_auto, "./tsgt/mobilitaet_auto.csv")
+
+cat("Wrote a/b with", nrow(a), nrow(b), "rows")
