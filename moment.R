@@ -17,7 +17,7 @@ time <- "today 3-m"
 # corona: Krisenhilfen, Coronahilfen
 # ekz: "Kärtner Straße"
 #corona <- c("Krisenhilfen", "Cofag", "Coronahilfen", "Stundungen", "Kredite", "Inzidenz", "Coronafaelle")
-corona <- c("Cofag", "Stundungen", "Kredite", "Inzidenz", "Coronafälle")
+corona <- c("Cofag", "Kredite", "Inzidenz", "Coronafälle")
 
 corona <- ts_gtrends(
   keyword = corona,
