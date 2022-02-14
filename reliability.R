@@ -148,16 +148,6 @@ gastro_vs_vj <- gastro_vs_vj %>% ts_xts()
 
 
 ###### OENB WEEKLY ######
-wbip_oenb <- read_xlsx(path = "/mnt/home/wallnerm/data_repository/BIP_indikator_oenb.xlsx",
-                       sheet = "Wochen-BIP-Indikator", skip = 13,
-                       col_names = TRUE) %>%
-  rename(DATE = ...3) %>%
-  select(-...1, -...2) %>%
-  pivot_longer(cols = c("Privater Konsum":"Tourismusexporte")) %>% 
-  rename(CAT1 = name, VALUE = value, Gesamt = `Reales BIP im Vorkrisenvergleich`) %>%
-  filter(!is.na(Gesamt)) %>%
-  rename()
-
 temp <- tempfile()
 download.file("https://www.oenb.at/dam/jcr:7c5ab44b-204d-4d45-a802-884d1019f7f5/data_on_the_weekly_GDP-indicator.csv",
               destfile = temp)
