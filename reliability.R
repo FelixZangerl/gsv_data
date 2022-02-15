@@ -222,3 +222,5 @@ ts_dygraphs(ts_c(
 save(cc, gdp, pes, pes_w, pes_m, 
      wwwi, oecd_w, wecon_oenb, 
      handel_vs_vj, gastro_vs_vj, file = "../gsv_data/r_data/reliability.RData")
+
+cat("Finished")
