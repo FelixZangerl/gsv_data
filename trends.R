@@ -23,6 +23,8 @@ proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"),
 
 proc_trendecon_at()
 
+cat("1")
+
 #proc_trendecon_de()
 #proc_trendecon_ch()
 
@@ -38,6 +40,8 @@ clothing <- c("mango","zara","H&M","blue tomato","schuhe kaufen", "deichmann")
 
 proc_index(clothing, geo, "clothing")
 
+cat("2")
+
 #### FOOD DELIVERY #####
 food_delivery <- c("take away", "takeaway", "pizza bestellen")
 
@@ -47,6 +51,7 @@ food_delivery <- c("take away", "takeaway", "pizza bestellen")
 
 proc_index(food_delivery, geo, "food_delivery")
 
+cat("3")
 #### HOME OFFICE #####
 home_office <- c("headset", "monitor","maus","hdmi") 
 
@@ -57,6 +62,7 @@ home_office <- c("headset", "monitor","maus","hdmi")
 
 proc_index(home_office, geo, "home_office")
 
+cat("4")
 
 #### GARDENING #####
 gardening <- c("Heim+Hobby","Bau+Hobby","Bauhaus","hornbach","obi")
@@ -68,6 +74,8 @@ gardening <- c("Heim+Hobby","Bau+Hobby","Bauhaus","hornbach","obi")
 #proc_keyword_init(gardening[5], geo)
 
 proc_index(gardening, geo, "gardening")
+
+cat("5")
 
 #### CULTURAL #####
 cultural <- c("kino","theater","cinema","cineplexx","oper","konzert","oeticket")
@@ -82,6 +90,8 @@ cultural <- c("kino","theater","cinema","cineplexx","oper","konzert","oeticket")
 
 proc_index(cultural, geo, "cultural")
 
+cat("6")
+
 #### TRAVEL #####
 travel <- c("städtetrip","flug buchen","günstige flüge")
 
@@ -90,6 +100,8 @@ travel <- c("städtetrip","flug buchen","günstige flüge")
 #proc_keyword_init(travel[3], geo)
 
 proc_index(travel, geo, "travel")
+
+cat("7")
 
 #### MOBILITY #####
 mobility <- c("Fahrplan","taxi","sixt","google maps")
@@ -100,6 +112,8 @@ mobility <- c("Fahrplan","taxi","sixt","google maps")
 #proc_keyword_init(mobility[4], geo)
 
 proc_index(mobility, geo, "mobility")
+
+cat("8")
 
 #### LUXURY #####
 luxury <- c("juwelier","swarovski","uhr","uhren","christ","feichtinger")
@@ -112,6 +126,8 @@ luxury <- c("juwelier","swarovski","uhr","uhren","christ","feichtinger")
 #proc_keyword_init(luxury[6], geo)
 
 proc_index(luxury, geo, "luxury")
+
+cat("9")
 
 ### TESTS
 #x <- ts_gtrends_mwd("schlange", geo = "AT")
