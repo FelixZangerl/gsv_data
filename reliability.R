@@ -107,7 +107,7 @@ download.file("https://www.wifo.ac.at/wwadocs/konjunktur/W%C3%B6chentlicherWIFOW
 
 t0 <- as.numeric(as.Date("2007-01-01"))
 t1 <- as.numeric(as.Date(Sys.Date()))
-t <- round((t1 - t0) / 7) - 3 # weeks passed since index started
+t <- round((t1 - t0) / 7) - 1  # weeks passed since index started
 
 wwwi <- read_xlsx(temp, sheet = "WWWI",
 #wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
