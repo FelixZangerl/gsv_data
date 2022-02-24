@@ -4,6 +4,11 @@ library(trendecon)
 library(tsbox)
 
 geo <- "AT"
+
+cat(getwd())
+setwd("~/Documents/proj/ma_thesis/gsv_data/")
+cat(getwd())
+
 #
 #### TRENDECON ####
 keywords <- c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz")
