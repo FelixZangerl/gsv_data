@@ -115,7 +115,7 @@ wwwi <- read_xlsx(temp, sheet = "WWWI",
                   #col_types = c("date", "guess", "guess", "guess"), 
                   n_max = t) %>%
   mutate(DATE = as.character(DATE)) %>%
-  select(DATE, VALUE) %>%
+  dplyr::select(DATE, VALUE) %>%
   rename(time = DATE, value = VALUE) %>%
   ts_xts()
 
