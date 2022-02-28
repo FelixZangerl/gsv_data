@@ -7,53 +7,10 @@ library(dplyr)
 library(readr)
 ### NEW INDICATORS MOMENT #####
 
-##### CORONA #####
 #start <- "2014-01-01"
 geo <- "AT"
 today <- as.character(Sys.Date())
 time <- "today 3-m" 
-
-# constant 0: 
-# corona: Krisenhilfen, Coronahilfen
-# ekz: "Kärtner Straße"
-#corona <- c("Krisenhilfen", "Cofag", "Coronahilfen", "Stundungen", "Kredite", "Inzidenz", "Coronafaelle")
-corona <- c("Cofag", "Kredite", "Inzidenz", "Coronafälle")
-
-corona <- ts_gtrends(
-  keyword = corona,
-  geo     = "AT",
-  time    = time
-)
-
-write_csv(corona, "./tsgt/corona_comp.csv")
-
-#ts_plot(corona)
-corona <- ts_pick(ts_prcomp(corona), "PC1")
-
-tmp <- read_csv("./tsgt/corona.csv")
-corona <- full_join(corona, tmp)
-corona <- corona[!duplicated(corona$time),]
-write_csv(corona, "./tsgt/corona.csv")
-
-##### SKI #####
-ski <- c("Urlaub Tirol", "Skiurlaub Österreich", "Ischgl", "Winterurlaub", "Skifahren Österreich")
-
-ski <- ts_gtrends(
-  keyword = ski,
-  geo     = geo,
-  time    = time
-#  category = 265 # no results
-)
-
-
-ski <- ts_pick(ts_prcomp(ski), "PC1")
-#ts_plot(ski)
-
-tmp <- read_csv("./tsgt/ski.csv")
-ski <- full_join(tmp, ski)
-ski <- ski[!duplicated(ski$time),]
-
-write_csv(ski, "./tsgt/ski.csv")
 
 ##### HANDEL OFFLINE #####
 handel_offline <- c("Shopping Center", "SCS", "SCN", "EKZ", "Geschäft")
@@ -98,6 +55,93 @@ cat("Write a with", nrow(a), "\n")
 cat("handel_vs_vj with" ,nrow(handel_vs_vj), "rows")
 cat("handel_offline_w with" ,nrow(handel_offline_w), "rows")
 write_csv(a, file = "./tsgt/handel_offline_vgr.csv")
+
+##### GASTRONOMIE OFFLINE #####
+gastro <- c("Öffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte")
+
+gastro <- ts_gtrends(
+  keyword = gastro,
+  geo     = geo,
+  time    = time,
+  category = 71 # Food & Drink
+)
+
+gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
+#ts_plot(gastro)
+
+tmp <- read_csv("./tsgt/gastro.csv")
+gastro <- full_join(gastro, tmp)
+gastro <- gastro[!duplicated(gastro$time),]
+write_csv(gastro, "./tsgt/gastro.csv")
+
+###### WEEKLY DATA COMPARISION ######
+gastro_w <- gastro %>% ts_frequency("week")
+
+start <- min(gastro_w$time)
+end <- max(time(gastro_vs_vj))
+#cat("/n!!!!!!!!",end,"/n")
+
+gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
+gastro_vs_vj$value <- as.numeric(gastro_vs_vj$value)
+gastro_vs_vj$id <- "WWWI_Gastro"
+gastro_vs_vj <- gastro_vs_vj %>% filter(time >= start)
+#a <- a %>% ts_xts()
+
+gastro_w <- gastro_w %>% ts_data.frame()
+gastro_w <- gastro_w %>% dplyr::filter(time <= end)
+#gastro_w <- gastro_w %>% ts_xts()
+
+b <- rbind(gastro_vs_vj, gastro_w)
+#b <- b %>% ts_xts()
+
+cat("Write b with", nrow(b), " \n")
+write_csv(b, file = "./tsgt/gastro_vgr.csv")
+
+#dygraph(b)
+
+##### CORONA #####
+# constant 0: 
+# corona: Krisenhilfen, Coronahilfen
+# ekz: "Kärtner Straße"
+#corona <- c("Krisenhilfen", "Cofag", "Coronahilfen", "Stundungen", "Kredite", "Inzidenz", "Coronafaelle")
+corona <- c("Cofag", "Kredite", "Inzidenz", "Coronafälle")
+
+corona <- ts_gtrends(
+  keyword = corona,
+  geo     = "AT",
+  time    = time
+)
+
+write_csv(corona, "./tsgt/corona_comp.csv")
+
+#ts_plot(corona)
+corona <- ts_pick(ts_prcomp(corona), "PC1")
+
+tmp <- read_csv("./tsgt/corona.csv")
+corona <- full_join(corona, tmp)
+corona <- corona[!duplicated(corona$time),]
+write_csv(corona, "./tsgt/corona.csv")
+
+##### SKI #####
+ski <- c("Urlaub Tirol", "Skiurlaub Österreich", "Ischgl", "Winterurlaub", "Skifahren Österreich")
+
+ski <- ts_gtrends(
+  keyword = ski,
+  geo     = geo,
+  time    = time
+#  category = 265 # no results
+)
+
+
+ski <- ts_pick(ts_prcomp(ski), "PC1")
+#ts_plot(ski)
+
+tmp <- read_csv("./tsgt/ski.csv")
+ski <- full_join(tmp, ski)
+ski <- ski[!duplicated(ski$time),]
+
+write_csv(ski, "./tsgt/ski.csv")
+
 
 ##### BAUMARKT UND GARTEN OFFLINE #####
 baumarkt <- c("dehner", "kika", "bellaflora", "xxxlutz", "ikea")
@@ -154,48 +198,6 @@ dienstleistung <- full_join(dienstleistung, tmp)
 dienstleistung <- dienstleistung[!duplicated(dienstleistung$time),]
 write_csv(dienstleistung, "./tsgt/dienstleistung.csv")
 
-##### GASTRONOMIE OFFLINE #####
-gastro <- c("Öffnungszeiten", "Bar", "Restaurant", "Mittagsmenu", "Speisekarte")
-
-gastro <- ts_gtrends(
-  keyword = gastro,
-  geo     = geo,
-  time    = time,
-  category = 71 # Food & Drink
-)
-
-gastro <- (ts_pick(ts_prcomp(gastro), "PC1"))
-#ts_plot(gastro)
-
-tmp <- read_csv("./tsgt/gastro.csv")
-gastro <- full_join(gastro, tmp)
-gastro <- gastro[!duplicated(gastro$time),]
-write_csv(gastro, "./tsgt/gastro.csv")
-
-###### WEEKLY DATA COMPARISION ######
-gastro_w <- gastro %>% ts_frequency("week")
-
-start <- min(gastro_w$time)
-end <- max(time(gastro_vs_vj))
-#cat("/n!!!!!!!!",end,"/n")
-
-gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
-gastro_vs_vj$value <- as.numeric(gastro_vs_vj$value)
-gastro_vs_vj$id <- "WWWI_Gastro"
-gastro_vs_vj <- gastro_vs_vj %>% filter(time >= start)
-#a <- a %>% ts_xts()
-
-gastro_w <- gastro_w %>% ts_data.frame()
-gastro_w <- gastro_w %>% dplyr::filter(time <= end)
-#gastro_w <- gastro_w %>% ts_xts()
-
-b <- rbind(gastro_vs_vj, gastro_w)
-#b <- b %>% ts_xts()
-
-cat("Write b with", nrow(b), " \n")
-write_csv(b, file = "./tsgt/gastro_vgr.csv")
-
-#dygraph(b)
 
 ##### EINKAUFSZENTREN #####
 ekz <- c("Mariahilferstraße", "Einkaufszentrum", "Herrengasse", "Getreidegasse")

@@ -137,7 +137,8 @@ handel_vs_vj <- handel_vs_vj %>% xts:::.drop.time()
 
 handel_vs_vj <- handel_vs_vj %>% ts_data.frame()
 #handel_vs_vj$time <- handel_vs_vj$time %m+% days(1)
-handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] <- handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] %m+% days(1)
+handel_vs_vj$time <- lubridate::ceiling_date(handel_vs_vj$time, unit="week")
+#handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] <- handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] %m+% days(1)
 handel_vs_vj <- handel_vs_vj %>% ts_xts()
 
 gastro_vs_vj <- na.omit(wwwi_entstehung[[7]]) #starts KW2 2020
@@ -147,7 +148,8 @@ gastro_vs_vj <- gastro_vs_vj %>% xts:::.drop.time()
 
 gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
 #gastro_vs_vj$time <- gastro_vs_vj$time %m+% days(1)
-gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] <- gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] %m+% days(1)
+gastro_vs_vj$time <- lubridate::ceiling_date(gastro_vs_vj$time, unit="week")
+#gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] <- gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] %m+% days(1)
 gastro_vs_vj <- gastro_vs_vj %>% ts_xts()
 
 #wwwi_wifo <- read_excel("real_data/wwwi_wifo.xlsx", sheet = "WWWI")
@@ -170,7 +172,6 @@ wecon_oenb <- ts(wecon_oenb, start = c(2020,10), frequency = 52) %>% ts_xts()
 ### REALIGN WEEKLY ####
 
 pes_w <- pes_w[time(pes_w) >= "2020-01-01"] 
-
 wwwi <- wwwi[time(wwwi) >= "2020-01-01"]  
 
 ### PLOT REL MONTHLY ####
