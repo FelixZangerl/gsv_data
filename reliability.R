@@ -19,7 +19,7 @@ pes_m <- ts_frequency(pes, to = "month")
 
 pes_w <- ts_frequency(pes, to = "week") %>% ts_xts()
 
-cc <- read_csv("./real_data/consumer_confidence.csv")
+cc <- read_csv("/home/felix/Documents/proj/ma_thesis/gsv_data/real_data/consumer_confidence.csv")
 
 cc <- cc %>%
   filter(`Data producer` == "Austria") %>%
@@ -30,7 +30,7 @@ cc <- cc %>%
 
 cc$value <- cc$value/10
 
-gdp <- read_csv("./real_data/gdp_aut_q_oecd.csv")
+gdp <- read_csv("/home/felix/Documents/proj/ma_thesis/gsv_data/real_data/gdp_aut_q_oecd.csv")
 
 gdp <- gdp %>%
   rename(time = TIME, value = Value) %>%
@@ -221,6 +221,6 @@ ts_dygraphs(ts_c(
 
 save(cc, gdp, pes, pes_w, pes_m, 
      wwwi, oecd_w, wecon_oenb, 
-     handel_vs_vj, gastro_vs_vj, file = "../gsv_data/r_data/reliability.RData")
+     handel_vs_vj, gastro_vs_vj, file = "/home/felix/Documents/proj/ma_thesis/gsv_data/r_data/reliability.RData")
 
 cat("Finished")
