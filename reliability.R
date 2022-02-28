@@ -10,7 +10,7 @@ library(readxl)
 ### COMPARE MAIN INDEX AND CONSUMER CONFIDENCE AND GDP
 
 ### MAIN INDICATOR - monthly ####
-pes <- read_csv("https://raw.githubusercontent.com/FelixZangerl/gsv_data/main/raw/at/trendecon_sa.csv") %>%
+pes <- read_csv("/home/felix/Documents/proj/ma_thesis/gsv_data/raw/at/trendecon_sa.csv") %>%
   dplyr::select(time,value) %>%
   #mutate(value = -value) %>%
   ts_xts()
@@ -119,6 +119,10 @@ wwwi <- read_xlsx(temp, sheet = "WWWI",
   rename(time = DATE, value = VALUE) %>%
   ts_xts()
 
+wwwi <- wwwi %>% ts_data.frame() 
+wwwi$time <- wwwi$time %m-% days(1)
+wwwi <- wwwi %>% ts_xts()
+
 wwwi_entstehung <- read_xlsx(temp, sheet = "Beiträge_Entstehung",
                              skip = 3)
 
@@ -132,7 +136,7 @@ handel_vs_vj <- ts(handel_vs_vj, start = c(2020,2), frequency = 52) %>% ts_xts()
 handel_vs_vj <- handel_vs_vj %>% xts:::.drop.time()
 
 handel_vs_vj <- handel_vs_vj %>% ts_data.frame()
-handel_vs_vj$time <- handel_vs_vj$time %m+% days(1)
+#handel_vs_vj$time <- handel_vs_vj$time %m+% days(1)
 handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] <- handel_vs_vj$time[handel_vs_vj$time >= "2022-01-01"] %m+% days(1)
 handel_vs_vj <- handel_vs_vj %>% ts_xts()
 
@@ -142,7 +146,7 @@ gastro_vs_vj <- ts(gastro_vs_vj, start = c(2020,2), frequency = 52) %>% ts_xts()
 gastro_vs_vj <- gastro_vs_vj %>% xts:::.drop.time()
 
 gastro_vs_vj <- gastro_vs_vj %>% ts_data.frame()
-gastro_vs_vj$time <- gastro_vs_vj$time %m+% days(1)
+#gastro_vs_vj$time <- gastro_vs_vj$time %m+% days(1)
 gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] <- gastro_vs_vj$time[gastro_vs_vj$time >= "2022-01-01"] %m+% days(1)
 gastro_vs_vj <- gastro_vs_vj %>% ts_xts()
 
@@ -190,16 +194,16 @@ ts_dygraphs(ts_c(
 
 wecon_oenb <- wecon_oenb %>% xts:::.drop.time()
 
-wwwi <- wwwi %>% ts_data.frame()
-wwwi$time <- wwwi$time %m-% days(3)
-wwwi <- wwwi %>% ts_xts()
+#wwwi <- wwwi %>% ts_data.frame() #DO THAT BEFORE SPLITTING IN HANDEL/GASTRO
+#wwwi$time <- wwwi$time %m-% days(1)
+#wwwi <- wwwi %>% ts_xts()
 
 oecd_w <- oecd_w %>% ts_data.frame()
-oecd_w$time <- oecd_w$time %m-% days(2)
+#oecd_w$time <- oecd_w$time %m-% days(2)
 oecd_w <- oecd_w %>% ts_xts()
 
 pes_w <- pes_w %>% ts_data.frame()
-pes_w$time <- pes_w$time %m-% days(2)
+#pes_w$time <- pes_w$time %m-% days(2)
 pes_w <- pes_w %>% ts_xts()
 
 
