@@ -107,17 +107,16 @@ download.file("https://www.wifo.ac.at/wwadocs/konjunktur/W%C3%B6chentlicherWIFOW
 
 t0 <- as.numeric(as.Date("2007-01-01"))
 t1 <- as.numeric(as.Date(Sys.Date()))
-t <- round((t1 - t0) / 7) - 2  # weeks passed since index started
+t <- round((t1 - t0) / 7) - 5  # weeks passed since index started
 
 wwwi <- read_xlsx(temp, sheet = "WWWI",
 #wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
-                  skip = 2, col_names = c("DATE", "VALUE", "cng_yavg", "cng_q"),
-                  #col_types = c("date", "guess", "guess", "guess"), 
-                  n_max = t) %>%
-  mutate(DATE = as.character(DATE)) %>%
+                  skip = 2, col_names = c("DATE", "VALUE", "cng_yavg", "cng_q")) %>%
   dplyr::select(DATE, VALUE) %>%
-  rename(time = DATE, value = VALUE) %>%
-  ts_xts()
+  rename(time = DATE, value = VALUE)
+
+wwwi <- na.omit(wwwi)
+wwwi$time <- as.Date(as.numeric(wwwi$time), origin = "1899-12-30")
 
 wwwi <- wwwi %>% ts_data.frame() 
 wwwi$time <- wwwi$time %m-% days(1)
