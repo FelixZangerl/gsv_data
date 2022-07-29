@@ -111,7 +111,7 @@ t <- round((t1 - t0) / 7) - 5  # weeks passed since index started
 
 wwwi <- read_xlsx(temp, sheet = "WWWI",
 #wwwi <- read_xlsx(path = "./real_data/wwwi_wifo.xlsx", sheet = "WWWI",
-                  skip = 2, col_names = c("DATE", "VALUE", "cng_yavg", "cng_q")) %>%
+                  skip = 2, col_names = c("DATE", "VALUE", "cng_yavg")) %>% #, "cng_q")) %>%
   dplyr::select(DATE, VALUE) %>%
   rename(time = DATE, value = VALUE)
 
