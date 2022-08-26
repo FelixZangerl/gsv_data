@@ -1,5 +1,5 @@
 rm(list=ls())
-load("~/Documents/proj/ma_thesis/gsv_data/r_data/reliability.RData")
+load("/home/felix/Documents/proj/ma_thesis/gsv_data/r_data/reliability.RData")
 library(trendecon)
 library(tsbox)
 library(tempdisagg)
