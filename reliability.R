@@ -143,6 +143,7 @@ handel_vs_vj <- handel_vs_vj %>% ts_xts()
 
 gastro_vs_vj <- na.omit(wwwi_entstehung[[7]]) #starts KW2 2020
 gastro_vs_vj <- gastro_vs_vj[-1]
+gastro_vs_vj <- as.numeric(gastro_vs_vj)
 gastro_vs_vj <- ts(gastro_vs_vj, start = c(2020,2), frequency = 52) %>% ts_xts() #52.17857
 gastro_vs_vj <- gastro_vs_vj %>% xts:::.drop.time()
 
