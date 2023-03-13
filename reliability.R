@@ -131,6 +131,7 @@ wwwi_e_names <- c("Month/Year", "KW", "WWWI",
 
 handel_vs_vj <- na.omit(wwwi_entstehung[[5]]) #starts KW2 2020
 handel_vs_vj <- handel_vs_vj[-1]
+handel_vs_vj <- as.numeric(handel_vs_vj)
 handel_vs_vj <- ts(handel_vs_vj, start = c(2020,2), frequency = 52) %>% ts_xts() #52.17857
 handel_vs_vj <- handel_vs_vj %>% xts:::.drop.time()
 
