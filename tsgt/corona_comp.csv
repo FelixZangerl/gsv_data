@@ -1,5 +1,5 @@
 id,time,value
-Cofag,2023-02-05,48
+Cofag,2023-02-05,49
 Cofag,2023-02-06,68
 Cofag,2023-02-07,38
 Cofag,2023-02-08,0
@@ -37,10 +37,10 @@ Cofag,2023-03-11,43
 Cofag,2023-03-12,0
 Cofag,2023-03-13,0
 Cofag,2023-03-14,0
-Cofag,2023-03-15,83
+Cofag,2023-03-15,84
 Cofag,2023-03-16,73
 Cofag,2023-03-17,0
-Cofag,2023-03-18,40
+Cofag,2023-03-18,39
 Cofag,2023-03-19,0
 Cofag,2023-03-20,0
 Cofag,2023-03-21,0
@@ -83,7 +83,7 @@ Cofag,2023-04-26,0
 Cofag,2023-04-27,0
 Cofag,2023-04-28,0
 Cofag,2023-04-29,0
-Cofag,2023-04-30,61
+Cofag,2023-04-30,0
 Cofag,2023-05-01,0
 Kredite,2023-02-05,25
 Kredite,2023-02-06,91
@@ -185,7 +185,7 @@ Inzidenz,2023-02-15,0
 Inzidenz,2023-02-16,0
 Inzidenz,2023-02-17,62
 Inzidenz,2023-02-18,50
-Inzidenz,2023-02-19,51
+Inzidenz,2023-02-19,52
 Inzidenz,2023-02-20,16
 Inzidenz,2023-02-21,0
 Inzidenz,2023-02-22,16
@@ -253,8 +253,8 @@ Inzidenz,2023-04-24,0
 Inzidenz,2023-04-25,0
 Inzidenz,2023-04-26,0
 Inzidenz,2023-04-27,29
-Inzidenz,2023-04-28,71
-Inzidenz,2023-04-29,35
+Inzidenz,2023-04-28,0
+Inzidenz,2023-04-29,36
 Inzidenz,2023-04-30,0
 Inzidenz,2023-05-01,0
 Coronafälle,2023-02-05,0
@@ -264,7 +264,7 @@ Coronafälle,2023-02-08,0
 Coronafälle,2023-02-09,0
 Coronafälle,2023-02-10,38
 Coronafälle,2023-02-11,0
-Coronafälle,2023-02-12,39
+Coronafälle,2023-02-12,40
 Coronafälle,2023-02-13,0
 Coronafälle,2023-02-14,0
 Coronafälle,2023-02-15,0
@@ -298,7 +298,7 @@ Coronafälle,2023-03-14,0
 Coronafälle,2023-03-15,0
 Coronafälle,2023-03-16,54
 Coronafälle,2023-03-17,27
-Coronafälle,2023-03-18,93
+Coronafälle,2023-03-18,92
 Coronafälle,2023-03-19,0
 Coronafälle,2023-03-20,0
 Coronafälle,2023-03-21,37
@@ -340,6 +340,6 @@ Coronafälle,2023-04-25,0
 Coronafälle,2023-04-26,25
 Coronafälle,2023-04-27,0
 Coronafälle,2023-04-28,0
-Coronafälle,2023-04-29,44
+Coronafälle,2023-04-29,0
 Coronafälle,2023-04-30,0
-Coronafälle,2023-05-01,0
+Coronafälle,2023-05-01,34
