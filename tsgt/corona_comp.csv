@@ -7,7 +7,7 @@ Cofag,2023-03-26,42
 Cofag,2023-03-27,0
 Cofag,2023-03-28,45
 Cofag,2023-03-29,0
-Cofag,2023-03-30,50
+Cofag,2023-03-30,49
 Cofag,2023-03-31,0
 Cofag,2023-04-01,0
 Cofag,2023-04-02,0
@@ -58,7 +58,7 @@ Cofag,2023-05-16,0
 Cofag,2023-05-17,0
 Cofag,2023-05-18,0
 Cofag,2023-05-19,0
-Cofag,2023-05-20,69
+Cofag,2023-05-20,68
 Cofag,2023-05-21,0
 Cofag,2023-05-22,78
 Cofag,2023-05-23,0
@@ -74,7 +74,7 @@ Cofag,2023-06-01,0
 Cofag,2023-06-02,0
 Cofag,2023-06-03,42
 Cofag,2023-06-04,0
-Cofag,2023-06-05,40
+Cofag,2023-06-05,41
 Cofag,2023-06-06,0
 Cofag,2023-06-07,0
 Cofag,2023-06-08,0
@@ -84,10 +84,10 @@ Cofag,2023-06-11,0
 Cofag,2023-06-12,0
 Cofag,2023-06-13,0
 Cofag,2023-06-14,0
-Cofag,2023-06-15,0
+Cofag,2023-06-15,38
 Cofag,2023-06-16,0
 Cofag,2023-06-17,0
-Cofag,2023-06-18,62
+Cofag,2023-06-18,71
 Kredite,2023-03-22,0
 Kredite,2023-03-23,0
 Kredite,2023-03-24,0
@@ -109,7 +109,7 @@ Kredite,2023-04-08,0
 Kredite,2023-04-09,0
 Kredite,2023-04-10,67
 Kredite,2023-04-11,0
-Kredite,2023-04-12,80
+Kredite,2023-04-12,81
 Kredite,2023-04-13,0
 Kredite,2023-04-14,38
 Kredite,2023-04-15,0
@@ -121,7 +121,7 @@ Kredite,2023-04-20,86
 Kredite,2023-04-21,52
 Kredite,2023-04-22,0
 Kredite,2023-04-23,0
-Kredite,2023-04-24,24
+Kredite,2023-04-24,25
 Kredite,2023-04-25,59
 Kredite,2023-04-26,27
 Kredite,2023-04-27,75
@@ -148,7 +148,7 @@ Kredite,2023-05-17,0
 Kredite,2023-05-18,57
 Kredite,2023-05-19,0
 Kredite,2023-05-20,0
-Kredite,2023-05-21,92
+Kredite,2023-05-21,94
 Kredite,2023-05-22,0
 Kredite,2023-05-23,0
 Kredite,2023-05-24,0
@@ -163,17 +163,17 @@ Kredite,2023-06-01,0
 Kredite,2023-06-02,0
 Kredite,2023-06-03,0
 Kredite,2023-06-04,0
-Kredite,2023-06-05,28
+Kredite,2023-06-05,29
 Kredite,2023-06-06,100
 Kredite,2023-06-07,0
 Kredite,2023-06-08,0
 Kredite,2023-06-09,0
 Kredite,2023-06-10,0
-Kredite,2023-06-11,28
+Kredite,2023-06-11,29
 Kredite,2023-06-12,0
 Kredite,2023-06-13,0
 Kredite,2023-06-14,0
-Kredite,2023-06-15,0
+Kredite,2023-06-15,43
 Kredite,2023-06-16,40
 Kredite,2023-06-17,0
 Kredite,2023-06-18,0
@@ -193,7 +193,7 @@ Inzidenz,2023-04-03,0
 Inzidenz,2023-04-04,0
 Inzidenz,2023-04-05,0
 Inzidenz,2023-04-06,67
-Inzidenz,2023-04-07,69
+Inzidenz,2023-04-07,70
 Inzidenz,2023-04-08,0
 Inzidenz,2023-04-09,29
 Inzidenz,2023-04-10,0
@@ -225,7 +225,7 @@ Inzidenz,2023-05-05,48
 Inzidenz,2023-05-06,0
 Inzidenz,2023-05-07,0
 Inzidenz,2023-05-08,0
-Inzidenz,2023-05-09,50
+Inzidenz,2023-05-09,51
 Inzidenz,2023-05-10,0
 Inzidenz,2023-05-11,27
 Inzidenz,2023-05-12,0
@@ -263,9 +263,9 @@ Inzidenz,2023-06-12,0
 Inzidenz,2023-06-13,32
 Inzidenz,2023-06-14,0
 Inzidenz,2023-06-15,0
-Inzidenz,2023-06-16,45
-Inzidenz,2023-06-17,55
-Inzidenz,2023-06-18,31
+Inzidenz,2023-06-16,0
+Inzidenz,2023-06-17,28
+Inzidenz,2023-06-18,69
 Coronafälle,2023-03-22,0
 Coronafälle,2023-03-23,68
 Coronafälle,2023-03-24,0
@@ -282,7 +282,7 @@ Coronafälle,2023-04-03,0
 Coronafälle,2023-04-04,0
 Coronafälle,2023-04-05,0
 Coronafälle,2023-04-06,0
-Coronafälle,2023-04-07,45
+Coronafälle,2023-04-07,46
 Coronafälle,2023-04-08,0
 Coronafälle,2023-04-09,0
 Coronafälle,2023-04-10,59
@@ -354,4 +354,4 @@ Coronafälle,2023-06-14,0
 Coronafälle,2023-06-15,0
 Coronafälle,2023-06-16,0
 Coronafälle,2023-06-17,0
-Coronafälle,2023-06-18,59
+Coronafälle,2023-06-18,69
