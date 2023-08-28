@@ -71,6 +71,7 @@ cat("4")
 
 #### GARDENING #####
 gardening <- c("Heim+Hobby","Bau+Hobby","Bauhaus","hornbach","obi")
+gardening <- c("Heim+Hobby","Bau+Hobby","Bauhaus","hornbach")
 
 #proc_keyword_init(gardening[1], geo)
 #proc_keyword_init(gardening[2], geo)
