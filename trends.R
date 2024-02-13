@@ -28,7 +28,7 @@ proc_index(c("Wirtschaftskrise","Kurzarbeit","arbeitslos","Insolvenz"),
 
 proc_trendecon_at()
 
-cat("1")
+#cat("1")
 
 #proc_trendecon_de()
 #proc_trendecon_ch()
